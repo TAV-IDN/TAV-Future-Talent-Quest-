@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TAV Future Talent Quest™</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--em:#0E7C56;--em2:#17A06C;--eml:#D9F2E4;--can:#1F4D3A;--iv:#FFFDF6;--cr:#FBF3E2;--sd:#F1E7CF;--sun:#F7C948;--te:#E8734A;--te2:#C95A34;--ink:#33302B;--ink2:#6f6759}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Nunito,sans-serif;background:var(--iv);color:var(--ink);font-size:16px;line-height:1.55}
+h1,h2,h3,h4{font-family:Fredoka,sans-serif;color:var(--can);line-height:1.15;font-weight:600}
+a{color:var(--em)}
+.w{max-width:1000px;margin:0 auto;padding:18px}.w2{max-width:720px;margin:0 auto;padding:18px}
+.btn{border:0;border-radius:999px;padding:11px 22px;font-family:Fredoka;font-weight:600;font-size:16px;cursor:pointer;background:var(--em);color:#fff;transition:.15s;display:inline-flex;gap:8px;align-items:center}
+.btn:hover{background:var(--em2);transform:translateY(-1px)}
+.btn.te{background:var(--te2)}.btn.te:hover{background:var(--te)}
+.btn.gh{background:#fff;color:var(--em);border:2px solid var(--em)}.btn.gh:hover{background:var(--eml)}
+.btn.dk{background:#b3402e}.btn.big{font-size:20px;padding:15px 34px}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.card{background:#fff;border:2px solid var(--sd);border-radius:18px;padding:20px}
+label.f{display:block;font-weight:800;margin:12px 0 4px;font-size:14px}
+input,select{width:100%;padding:11px 13px;border:2px solid var(--sd);border-radius:12px;font-family:Nunito;font-size:16px;background:#fff}
+input:focus{outline:3px solid var(--eml);border-color:var(--em2)}
+.note{font-size:13px;color:var(--ink2)}.err{color:#b3402e;font-weight:700;font-size:14px;min-height:20px}
+.pill{display:inline-block;padding:3px 12px;border-radius:999px;font-weight:800;font-size:12px;background:var(--eml);color:var(--can)}
+.pill.y{background:#FBE9C8;color:#8a5a10}.pill.g{background:#EFE9DA;color:var(--ink2)}
+#topbar{background:#fffdf6ee;border-bottom:2px solid var(--sd);position:sticky;top:0;z-index:50}
+#topbar .w{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 18px}
+.logo{display:flex;align-items:center;gap:9px;font-family:Fredoka;font-weight:700;font-size:17px;color:var(--can);cursor:pointer}
+.logo i{width:36px;height:36px;border-radius:11px;background:var(--em);color:#fff;display:grid;place-items:center;font-style:normal;font-size:18px}
+.lsw{display:flex;border:2px solid var(--sd);border-radius:999px;overflow:hidden}
+.lsw button{border:0;background:#fff;padding:4px 12px;font-weight:800;cursor:pointer;color:var(--ink2);font-family:Nunito}
+.lsw button.on{background:var(--em);color:#fff}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;padding:30px 0}
+.hero h1{font-size:clamp(28px,4.5vw,48px)}
+.hero .tg{font-family:Fredoka;color:var(--te2);font-size:clamp(16px,2.2vw,22px);font-weight:600;margin:4px 0}
+.hero .cta{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.scn{position:relative;height:270px;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#BFE3F2 0%,#E8F5E3 55%,#CDE9B5 56%,#A8D283 100%);border:2px solid var(--sd)}
+.scn .s{position:absolute;top:16px;right:20px;width:52px;height:52px;border-radius:50%;background:var(--sun)}
+.scn .m{position:absolute;bottom:44%;background:var(--can);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.scn .e1{position:absolute;bottom:20px;right:34px;font-size:42px}
+.scn .e2{position:absolute;top:36px;left:28px;font-size:32px;transform:rotate(-14deg)}
+.scn .e3{position:absolute;bottom:58%;left:20%;font-size:26px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+.grid5{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:14px}
+.gm{background:#fff;border:2px solid var(--sd);border-radius:16px;padding:14px;text-align:center}
+.gm .gi{font-size:38px}.gm b{font-family:Fredoka;color:var(--can)}
+.disc{background:var(--cr);border:2px dashed var(--sd);border-radius:14px;padding:14px;font-size:13.5px;margin-top:16px}
+footer{margin-top:40px;background:var(--can);color:#EAF6EE;padding:22px 0;font-size:14px}
+footer .w{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+body.cm #topbar{display:none}body.cm{background:linear-gradient(180deg,#EAF6EE,#FFFDF6 340px)}
+#childroot{display:none}body.cm #childroot{display:block}body.cm #app{display:none}
+.chh{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#ffffffdd;border-bottom:2px solid var(--sd);position:sticky;top:0;z-index:40;flex-wrap:wrap}
+.chh .q{font-family:Fredoka;font-weight:700;color:var(--can)}
+.chh .st{font-weight:800;color:#a07d00}
+.pgw{height:11px;background:var(--sd);border-radius:99px;flex:1;min-width:90px;overflow:hidden}
+.pgw i{display:block;height:100%;background:linear-gradient(90deg,#7CB342,var(--em2));transition:.3s}
+.hbtn{background:#fff;border:2px solid var(--sd);border-radius:99px;padding:5px 12px;font-weight:800;cursor:pointer;font-size:13px;font-family:Nunito}
+.scene{margin:16px 0 8px;text-align:center;font-size:52px;background:var(--cr);border-radius:20px;padding:18px;border:2px solid var(--sd)}
+.prompt{font-family:Fredoka;font-size:clamp(19px,3vw,25px);color:var(--can);text-align:center;margin:8px 2px 14px;font-weight:600}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;max-width:760px;margin:0 auto}
+.choice{background:#fff;border:3px solid var(--sd);border-radius:20px;padding:16px 10px;cursor:pointer;text-align:center;font-weight:800;font-size:15px;transition:.15s;min-height:120px;display:flex;flex-direction:column;gap:8px;justify-content:center;font-family:Nunito}
+.choice:hover{border-color:var(--em2);transform:translateY(-2px)}
+.choice.sel{border-color:var(--em);background:var(--eml)}
+.choice .ci{font-size:40px}
+.widget{max-width:640px;margin:0 auto;background:#fff;border:2px solid var(--sd);border-radius:20px;padding:18px;text-align:center}
+.slots,.pieces{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.slot{width:64px;height:64px;border:3px dashed var(--sd);border-radius:14px;display:grid;place-items:center;font-size:30px;background:#fff}
+.slot.ok{border-color:var(--em2);border-style:solid}
+.pc{width:64px;height:64px;border:3px solid var(--sd);border-radius:14px;background:var(--cr);font-size:30px;cursor:pointer;display:grid;place-items:center;font-family:Nunito}
+.pc:hover{border-color:var(--te)}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:420px;margin:0 auto}
+.tile{background:var(--cr);border:3px solid var(--sd);border-radius:14px;padding:12px 6px;cursor:pointer;font-weight:800;font-size:13px;font-family:Nunito}
+.tile.sel{border-color:var(--em);background:var(--eml)}
+.tile .ti{font-size:30px;display:block}
+.bins{display:flex;gap:12px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.tokrow{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--cr);border-radius:14px;padding:10px 14px;margin:8px 0;font-weight:800}
+.tokrow b{font-family:Fredoka;font-size:20px;min-width:64px;text-align:center}
+.fb{position:fixed;inset:0;background:#1f4d3acc;display:none;place-items:center;z-index:90;text-align:center}
+.fb.on{display:grid}
+.fbi{background:#fff;border-radius:26px;padding:30px 40px;animation:pop .3s}
+.fbi .fe{font-size:54px}.fbi .ft{font-family:Fredoka;font-size:24px;color:var(--can);font-weight:600}
+@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+.map{max-width:560px;margin:14px auto}
+.node{display:flex;align-items:center;gap:14px;background:#fff;border:3px solid var(--sd);border-radius:20px;padding:14px 18px;margin:10px 0;cursor:not-allowed;opacity:.5}
+.node.open{opacity:1;cursor:pointer;border-color:var(--sun)}
+.node.open:hover{transform:translateY(-2px)}
+.node.done{opacity:1;border-color:var(--em);background:var(--eml);cursor:default}
+.node .ni{font-size:34px}.node b{font-family:Fredoka;color:var(--can)}
+.bslots{display:flex;gap:8px;justify-content:center;margin:14px 0}
+.bslot{width:52px;height:52px;border-radius:14px;border:3px solid var(--sd);background:#fff;display:grid;place-items:center;font-size:26px}
+.bslot.on{border-color:var(--sun);background:#FBE9C8;animation:pop .4s}
+.buddyrow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+.buddy{background:#fff;border:3px solid var(--sd);border-radius:22px;padding:20px;width:220px;text-align:center;cursor:pointer;transition:.15s}
+.buddy:hover{border-color:var(--te);transform:translateY(-3px)}
+.buddy .av{font-size:64px}
+.rbadge{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:3px solid var(--sd);border-radius:20px;padding:16px 22px;min-width:140px}
+.rbadge .ri{font-size:44px}
+.bar{height:16px;background:var(--sd);border-radius:99px;overflow:hidden;flex:1}
+.bar i{display:block;height:100%;border-radius:99px}
+.reprow{display:flex;align-items:center;gap:10px;margin:7px 0}
+.reprow .lb{width:150px;font-weight:800;font-size:14px}
+.reprow .vl{width:36px;text-align:right;font-size:13px;font-weight:800}
+.obq{background:#fff;border:2px solid var(--sd);border-radius:16px;padding:16px;margin:10px 0}
+.obopts{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.obopt{border:2px solid var(--sd);background:#fff;border-radius:99px;padding:8px 16px;font-weight:800;cursor:pointer;font-size:14px;font-family:Nunito}
+.obopt.on{background:var(--em);border-color:var(--em);color:#fff}
+table.tb{width:100%;border-collapse:collapse;background:#fff;border:2px solid var(--sd);border-radius:12px;overflow:hidden;font-size:13.5px}
+.tb th{background:var(--cr);text-align:left;padding:8px 10px;font-family:Fredoka}
+.tb td{padding:8px 10px;border-top:1px solid var(--sd)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tab{border:2px solid var(--sd);background:#fff;border-radius:99px;padding:8px 18px;font-weight:800;cursor:pointer;font-family:Nunito;font-size:14px}
+.tab.on{background:var(--can);color:#fff;border-color:var(--can)}
+#modal{position:fixed;inset:0;background:#1f4d3acc;display:none;place-items:center;z-index:95}
+#modal.on{display:grid}
+#modal .mbox{background:#fff;border-radius:22px;padding:26px;max-width:430px;margin:14px;text-align:center}
+.gframe{background:#fff;border:2px solid var(--sd);border-radius:14px;overflow:hidden;box-shadow:0 4px 0 #00000010;max-width:430px;margin:0 auto}
+.gbar{background:var(--cr);display:flex;align-items:center;gap:5px;padding:6px 10px;border-bottom:2px solid var(--sd)}
+.gbar i{width:9px;height:9px;border-radius:50%;background:var(--sd)}
+.gbar span{font-size:10px;color:var(--ink2);margin-left:4px;background:#fff;border-radius:99px;padding:2px 10px;border:1px solid var(--sd)}
+.gscr{padding:12px;min-height:120px;background:var(--iv)}
+.mbtn{display:inline-block;border-radius:99px;padding:4px 11px;font-size:10px;font-family:Fredoka;font-weight:600;color:#fff;background:var(--em)}
+.mbtn.te{background:var(--te2)}
+.mbtn.o{background:#fff;color:var(--em);border:1.5px solid var(--em)}
+.minp{border:2px solid var(--sd);border-radius:8px;padding:5px 9px;font-size:10.5px;color:#a49a86;background:#fff;margin:4px 0;font-weight:700}
+.mcard{background:#fff;border:2px solid var(--sd);border-radius:10px;padding:8px}
+.mnode{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--sd);border-radius:10px;padding:5px 10px;margin:4px 0;font-size:10.5px;font-weight:800}
+.mtag{display:inline-block;background:#FBE9C8;color:#8a5a10;border-radius:99px;padding:2px 9px;font-size:9.5px;font-weight:800}
+.mbar{height:8px;background:var(--sd);border-radius:99px;overflow:hidden;flex:1}
+.gdots{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0}
+.gdot{width:28px;height:28px;border-radius:50%;border:2px solid var(--sd);background:#fff;font-weight:800;font-size:12px;cursor:pointer;display:grid;place-items:center;font-family:Nunito;color:var(--ink2)}
+.gdot.on{background:var(--can);color:#fff;border-color:var(--can)}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.scn{height:210px}}
+@media print{body *{visibility:hidden}#rep,#rep *,#gd,#gd *{visibility:visible}#rep,#gd{position:absolute;top:0;left:0;width:100%}}
+</style>
+</head>
+<body>
+<div id="topbar"></div>
+<div id="app"></div>
+<div id="childroot"></div>
+<div class="fb" id="fb"></div>
+<div id="modal"></div>
+<script>
+"use strict";
+var $=function(s){return document.querySelector(s)};
+var LANG="id",RER=function(){vLanding()},G=null,S=null;
+function T(s){return s.split("|")[LANG==="id"?0:1]}
+function esc(s){return String(s).replace(/</g,"&lt;")}
+function pick(s){return s.trim().split(/\s+/).map(function(x){return [x.slice(0,2),+x.slice(2)]})}
+function uid(){return Math.random().toString(36).slice(2,9)}
+var CI={BI:["Pembangun","Builder","🔧","#E8734A"],EX:["Penjelajah","Explorer","🔎","#4EA5DC"],CR:["Pencipta","Creator","🎨","#8E6FC1"],HE:["Penolong","Helper","🤝","#E96A7C"],LE:["Pemimpin","Leader","🚀","#E3A63B"],OR:["Pengatur","Organizer","📋","#2E9E8F"]};
+var CS={CU:["Ingin Tahu","Curious","💡"],CT:["Kreatif","Creative","🎨"],PS:["Pemecah Masalah","Problem Solver","🧩"],CO:["Bekerja Sama","Team Player","🤝"],PE:["Tekun","Determined","💪"],DM:["Pengambil Keputusan","Decision Maker","⚖️"]};
+var CIDES={BI:"membangun dan membuat sesuatu dengan tangan|building and making things",EX:"menemukan, menyelidiki, dan bertanya|discovering, investigating, asking questions",CR:"mencipta, mendesain, dan berimajinasi|creating, designing, imagining",HE:"membantu dan bekerja bersama orang lain|helping and working with others",LE:"memimpin, menyampaikan ide, mengambil inisiatif|leading, presenting ideas, taking initiative",OR:"merencanakan, mengurutkan, mengatur informasi|planning, sequencing, organizing"};
+var CSDES={CU:"menjelajah informasi dan mencari tahu|exploring information",CT:"menghasilkan ide baru|generating new ideas",PS:"mencari solusi atas tantangan|finding solutions",CO:"bekerja dan berkomunikasi dengan orang lain|working with others",PE:"meneruskan usaha saat sulit|continuing despite difficulty",DM:"menimbang pilihan dan memutuskan|weighing options and deciding"};
+var PAT={"CR_EX":"Jelajah & Cipta|Explore & Create","CR_HE":"Cipta & Bantu|Create & Help","LE_OR":"Pimpin & Atur|Lead & Organize","BI_OR":"Bangun & Atur|Build & Organize","CR_LE":"Cipta & Pimpin|Create & Lead","HE_LE":"Bantu & Pimpin|Help & Lead"};
+var SPAT={"CU_PS":"Eksplorasi & Penemuan|Exploration & Discovery","CT_PS":"Pemecahan Masalah Kreatif|Creative Problem Solving","CO_DM":"Pengambilan Keputusan Tim|Team Decision Making","PE_PS":"Tekun dalam Tantangan|Challenge Persistence"};
+var FBK={I:[["Pilihan yang keren!","Nice choice!"],["Wah, menarik sekali!","Interesting!"],["Seru! Ayo lanjut!","Fun! Let's go!"],["Penemuan bagus!","Great discovery!"]],F:[["Hebat, kamu berhasil!","Awesome, you did it!"],["Luar biasa!","Amazing!"],["Kamu menyelesaikannya!","You solved it!"]],P:[["Menarik! Ayo coba cara lain!","Interesting! Let's try another way!"],["Hampir! Bagus sudah berusaha!","Almost! Great effort!"]],B:[["Terima kasih sudah berbagi pilihanmu!","Thanks for sharing your choice!"],["Setiap pilihan berharga!","Every choice matters!"]]};
+var OBS=[["Anak saya sering bertanya bagaimana sesuatu bekerja.|My child often asks how things work.","CU"],["Anak saya suka menggambar, merancang, atau bercerita.|My child enjoys drawing, designing, or storytelling.","CT"],["Anak saya menikmati teka-teki dan tantangan memecahkan masalah.|My child enjoys puzzles and problem-solving.","PS"],["Anak saya senang bermain dan bekerja bersama anak lain.|My child enjoys playing and working with other children.","CO"],["Anak saya meneruskan tugas sulit sampai selesai.|My child keeps going on hard tasks until finished.","PE"],["Anak saya mudah memilih saat diberi beberapa pilihan.|My child decides easily when given options.","DM"],["Anak saya suka membangun atau merakit benda.|My child likes building or assembling things.","BI"],["Anak saya senang menjelajah dan mencoba hal baru.|My child loves exploring and trying new things.","EX"],["Anak saya sering punya ide atau cerita buatan sendiri.|My child often has their own ideas or stories.","CR"],["Anak saya peka dan suka menolong orang lain.|My child is caring and likes helping others.","HE"],["Anak saya suka memimpin atau mengatur kegiatan.|My child likes leading or organizing activities.","LE"],["Anak saya menyukai kerapian, urutan, dan daftar.|My child likes neatness, order, and lists.","OR"]];
+var OBOPT=["Tidak Pernah|Never","Kadang-kadang|Sometimes","Sering|Often","Sangat Sering|Very Often"];
+var RECS={BI:[["🤖","Robotika & rakitan|Robotics & building kits"],["🏗️","Proyek konstruksi mini|Mini construction projects"],["🔧","Merakit & memperbaiki|Making & fixing"]],EX:[["🔬","Eksperimen sains sederhana|Simple science experiments"],["🔎","Game misteri & teka-teki|Mystery games & puzzles"],["🌿","Jelajah alam & observasi|Nature exploration"]],CR:[["🎨","Menggambar & desain|Drawing & design"],["📖","Menulis & bercerita|Storytelling & writing"],["🧵","Kerajinan tangan|Arts & crafts"]],HE:[["🤝","Proyek tim|Team projects"],["🏘️","Kegiatan komunitas|Community activities"],["🐾","Merawat & menolong|Caring & helping"]],LE:[["🎤","Presentasi mini|Mini presentations"],["🚀","Memimpin proyek kecil|Leading small projects"],["📣","Mengatur acara|Organizing events"]],OR:[["📋","Merencanakan & membuat daftar|Planning & checklists"],["🗂️","Permainan sortir & urutan|Sorting & sequencing games"],["📅","Mengatur jadwal|Scheduling activities"]]};
+var GAMES=[
+{c:"BI",icon:"🔧",t:"Build It",sub:"Bangun Duniamu|Build Your World",badge:"Lencana Pembangun Andal|Master Builder Badge",
+ story:"Banjir merusak jembatan Desa Sungai Rimbun! Malik menandai lokasi di peta, Mintang mencatat semua bahan. Kamu kepala pembangunnya!|A flood broke the village bridge! Malik marks the spot, Mintang lists the materials. You are the chief builder!",
+ items:[
+ {t:"I",r:"g",q:"Desa Sungai Rimbun butuh bantuanmu! Proyek apa yang ingin kamu bangun dulu?|The village needs your help! Which project do you build first?",o:[["🌉","Jembatan kuat menyeberangi sungai|A strong bridge across the river","BI2 PS1"],["🛝","Menara permainan warna-warni|A colorful playground tower","CR2"],["🛠️","Bengkel perbaikan untuk warga|A repair workshop for everyone","BI1 HE1"]]},
+ {t:"I",r:"g",q:"Kamu punya kayu, batu, dan bata. Material mana yang kamu pilih?|You have wood, stone, and bricks. Which do you choose?",o:[["🪵","Kayu — ringan, mudah dibentuk|Wood — light, easy to shape","BI2 CT1"],["🪨","Batu — paling kuat|Stone — the strongest","BI2 PS1"],["🧱","Bata — rapi dan teratur|Bricks — neat and orderly","OR2 BI1"]]},
+ {t:"I",r:"g",q:"Pekerjaan membangun mana yang paling kamu suka?|Which building job do you like most?",o:[["📐","Mengukur dan menghitung bahan|Measuring and counting materials","OR2"],["🎨","Mendesain bentuk bangunan|Designing the building shape","CR2"],["🔧","Memasang dan merakit|Assembling and building","BI2"]]},
+ {t:"C",r:"ord",k:"build",q:"Susun dinding mengikuti pola balok!|Build the wall following the block pattern!",pat:["🟫","🟫","🟥","🟫"],wf:"PS2 OR1",wp:"PS1"},
+ {t:"C",r:"ord",k:"build",q:"Bangun jembatan terkuat dengan balok yang tersedia!|Build the strongest bridge with the blocks you have!",pat:["🪵","🪨","🪵","🟫"],wf:"PS2",wp:"PS1"},
+ {t:"C",r:"g",q:"Ujian beban menunjukkan satu bagian lemah. Bagian mana yang kamu perkuat?|The load test shows one weak part. Which do you strengthen?",o:[["🏗️","Penyangga di tengah|The middle support","PS2"],["🔩","Sambungan di kedua ujung|The joints at both ends","PS1 OR1"],["🎨","Pagar agar terlihat indah|The railing, to look beautiful","CR1"]]},
+ {t:"C",r:"g",q:"Jembatan masih goyah. Cara mana yang kamu coba?|The bridge is still shaky. Which way do you try?",o:[["🌈","Ubah bentuknya jadi lengkung|Change it to an arch shape","PS2 CT1"],["➕","Tambah banyak penyangga|Add many supports","PS1"],["🪶","Bahan ringan di bagian atas|Light materials on top","PS1 CT1"]]},
+ {t:"B",r:"g",q:"Aduh! Jembatan roboh saat diuji. Apa yang kamu lakukan?|Oh no! The bridge collapsed during the test. What do you do?",o:[["🔁","Coba lagi dengan susunan sama|Try again, same design","PE2"],["🧩","Ubah bagiannya, lalu coba lagi|Change part of it, then retry","PS2 PE1"],["💬","Bahas dulu bareng Malik & Mintang|Discuss with Malik & Mintang first","CO2 CU1"]]},
+ {t:"B",r:"g",q:"Bahan tinggal sedikit! Bagaimana kamu mengaturnya?|Only a few materials left! How do you manage them?",o:[["📋","Urutkan sesuai ukuran|Sort them by size","OR2"],["💡","Pakai untuk bagian terpenting dulu|Use them on the most important part","DM2 PS1"],["🤝","Bagi ke pembangun lain|Share them with other builders","CO1 HE1"]]},
+ {t:"B",r:"g",q:"Jembatan baru diresmikan! Pilih proyek desa berikutnya.|The new bridge is opened! Choose the next village project.",o:[["🏫","Gedung sekolah dua lantai|A two-story school building","BI2 OR1"],["🎪","Panggung seni desa|A village art stage","CR2"],["🚲","Jembatan gantung sepeda|A bicycle suspension bridge","BI1 EX1"],["🏥","Pos kesehatan desa|A village health post","HE2"]]}
+]},
+{c:"EX",icon:"🔎",t:"Mystery Lab",sub:"Selesaikan Misterinya|Solve the Mystery",badge:"Lencana Detektif Cilik|Little Detective Badge",
+ story:"Sesuatu terjadi di kebun sekolah! Tiga tomat matang hilang, jejak misterius ada di mana-mana. Malik dan Mintang membuka Laboratorium Misteri — kamu kepala penyelidiknya!|Something happened in the school garden! Three ripe tomatoes are missing. Malik and Mintang open the Mystery Lab — you are the lead investigator!",
+ items:[
+ {t:"I",r:"g",q:"Kasus mana yang kamu pilih duluan?|Which case do you pick first?",o:[["🍅","Tomat yang hilang dari kebun|The missing garden tomatoes","EX2 PS1"],["🗂️","Catatan kebun yang berantakan|The messy garden records","OR2"],["👻","Suara aneh dari gudang|A strange sound from the shed","EX1 CR1"]]},
+ {t:"I",r:"g",q:"Langkah penyelidikan mana yang paling kamu sukai?|Which investigation step do you like most?",o:[["🔎","Mengumpulkan petunjuk|Collecting clues","EX2 CU1"],["📊","Menyusun data jadi rapi|Organizing data neatly","OR2"],["🧪","Menguji dugaan lewat percobaan|Testing guesses with experiments","EX1 BI1"]]},
+ {t:"I",r:"g",q:"Bukti mana yang paling menarik untuk ditelusuri?|Which evidence is most interesting to follow?",o:[["🐛","Bekas gigitan kecil|Small bite marks","EX2"],["🥾","Cetakan sepatu di tanah|Shoe prints in the soil","EX1 PS1"],["🧺","Keranjang yang berpindah tempat|A basket that moved","EX1 OR1"]]},
+ {t:"C",r:"hot",q:"Selidiki kebun! Pilih 4 yang kamu anggap petunjuk.|Investigate the garden! Pick the 4 you think are clues.",tiles:[["🌱","Daun berlubang|Leaves with holes",1],["💧","Tanah kering|Dry soil",1],["🥫","Kaleng penyiram kosong|Empty watering can",1],["🌷","Bunga terkulai|Drooping flower",1],["🚗","Mobil-mobilan|A toy car",0],["🪁","Layang-layang sobek|A torn kite",0]],wf:"CU2 PS1",wp:"CU1"},
+ {t:"C",r:"sort",q:"Pisahkan: mana petunjuk, mana bukan!|Sort them: clue or not a clue!",bins:["Petunjuk|Clue","Bukan petunjuk|Not a clue"],cards:[["🐛","Bekas gigitan|Bite marks",0],["🎈","Balon warna-warni|A colorful balloon",1],["🥾","Cetakan sepatu|Shoe prints",0],["☔","Bekas genangan air|A puddle mark",0]],wf:"PS2 OR1",wp:"PS1"},
+ {t:"C",r:"ord",k:"seq",q:"Urutkan langkah penyelidikan yang benar!|Order the correct investigation steps!",steps:[["👀","Amati kebun|Observe the garden"],["📝","Catat petunjuk|Note the clues"],["💭","Buat dugaan|Make a guess"],["🧪","Uji dugaan|Test the guess"],["✅","Tarik kesimpulan|Draw a conclusion"]],wf:"PS2 OR2",wp:"OR1"},
+ {t:"C",r:"g",q:"Dua tersangka: tikus kebun atau kucing tetangga. Petunjuk mana yang paling membuktikan?|Two suspects: a garden rat or the cat next door. Which clue proves it best?",o:[["🐀","Gigitan kecil di batang rendah|Small bites on low stems","PS2"],["🐈","Bulu menempel di pagar|Fur stuck on the fence","PS1"],["🌧️","Tanah basah semalam|The soil was wet last night","CU1"]]},
+ {t:"B",r:"g",q:"Hasil penyelidikan mengejutkan — berbeda dari dugaanmu! Apa yang kamu lakukan?|The findings surprise you — different from your guess! What do you do?",o:[["🔁","Periksa ulang semua petunjuk|Recheck all the clues","PS2 PE1"],["💡","Buat dugaan baru dan uji lagi|Make a new guess and test it","CU2 PS1"],["👥","Selidik bareng tim|Investigate with the team","CO2"]]},
+ {t:"B",r:"g",q:"Naya ingin langsung menyimpulkan tanpa menguji. Bagaimana kamu menanggapinya?|Naya wants to conclude right away without testing. How do you respond?",o:[["🧪","Kita uji dulu biar yakin|Let us test first to be sure","PS2 DM1"],["👍","Boleh, kita coba idemu|Sure, let us try your idea","CO2"],["❓","Kenapa menurutmu begitu?|Why do you think so?","CU1 DM1"]]},
+ {t:"B",r:"g",q:"Kasus terpecahkan! Bagaimana kamu membagikan temuanmu?|Case solved! How do you share your findings?",o:[["📊","Presentasi rapi di depan kelas|A neat class presentation","LE1 OR1"],["🖼️","Pameran petunjuk untuk semua|A clue exhibition for everyone","CR1 HE1"],["📓","Tulis laporan detektif|Write a detective report","OR2"]]}
+]},
+{c:"CR",icon:"🎨",t:"Design Studio",sub:"Ciptakan Duniamu|Create Your World",badge:"Lencana Desainer Kreatif|Creative Designer Badge",
+ story:"Idemu menang lomba desain taman! Ada lahan kosong di Desa Sungai Rimbun. Warga ingin taman punya area bermain, pohon, bangku, dan jalan setapak. Malik pegang peta lahan, Mintang pegang daftar keinginan warga!|Your idea won the garden design contest! There is an empty lot in the village. Residents want a play area, trees, benches, and a path. Malik holds the site map, Mintang holds the wish list!",
+ items:[
+ {t:"I",r:"g",q:"Permintaan warga mana yang paling menarik untukmu?|Which request interests you most?",o:[["🛝","Area bermain anak|A kids play area","BI1 HE1"],["🎨","Mural dinding taman|A garden wall mural","CR2"],["🌿","Kebun tanaman langka|A rare plant garden","EX2"],["🪑","Sudut duduk yang nyaman|A cozy seating corner","HE1 OR1"]]},
+ {t:"I",r:"g",q:"Bagian desain mana yang paling kamu sukai?|Which design part do you like most?",o:[["✏️","Mengsketsa bentuk taman|Sketching the garden layout","CR2"],["📐","Menghitung ruang dan ukuran|Calculating space and sizes","OR2"],["🛠️","Memilih material bangunan|Choosing building materials","BI2"]]},
+ {t:"I",r:"g",q:"Tamanmu butuh tema. Pilih!|Your garden needs a theme. Choose!",o:[["🌋","Taman gunung & sawah|Mountain and rice-field garden","CR1 EX1"],["🐠","Taman bawah laut|An undersea garden","CR2"],["🦋","Taman kupu-kupu|A butterfly garden","EX1 CR1"],["🏮","Taman pasar malam|A night-market garden","HE1 CR1"]]},
+ {t:"C",r:"ord",k:"build",q:"Tata taman: letakkan elemen mengikuti denah!|Lay out the garden: place the pieces following the plan!",pat:["🛝","🌳","🪑","🛤️"],wf:"PS2 CT1",wp:"PS1"},
+ {t:"C",r:"ord",k:"build",q:"Lahan berubah! Susun ulang agar semuanya muat dan terhubung.|The lot changed! Rearrange so everything fits and connects.",pat:["🌳","🛤️","🛝","🪑"],wf:"PS2 OR1",wp:"PS1"},
+ {t:"C",r:"g",q:"Naya berkunjung: jalur setapak terlalu memutar. Apa yang kamu ubah?|Naya visits: the path loops too far. What do you change?",o:[["🌈","Lengkungkan jalur agar dekat dan indah|Curve it shorter and prettier","PS2 CT1"],["➕","Tambah jalur pintas lurus|Add a straight shortcut","PS2"],["🌳","Biarkan, tambah pohon peneduh|Keep it, add shade trees","HE1 CT1"]]},
+ {t:"C",r:"g",q:"Anggaran hanya cukup untuk SATU pilihan. Mana yang kamu pilih?|The budget covers only ONE choice. Which do you pick?",o:[["💡","Lampu taman untuk malam|Garden lights for the night","HE1 DM1"],["🎪","Panggung acara warga|A community event stage","LE1 DM1"],["💧","Penyiraman otomatis|Automatic plant watering","OR1 DM1"]]},
+ {t:"B",r:"g",q:"Warga meminta perubahan besar padahal desainmu sudah jadi. Responsmu?|Residents ask for big changes though your design is done. Your response?",o:[["🔄","Revisi sesuai permintaan mereka|Revise to match their requests","CO2"],["💬","Jelaskan alasan desainmu|Explain your design reasons","LE1 DM2"],["🤝","Diskusikan solusi tengah|Discuss a middle solution","CO1 CT1 DM1"]]},
+ {t:"B",r:"g",q:"Batu untuk jalan setapak cuma datang setengah pesanan. Apa yang kamu lakukan?|Only half the path stones arrived. What do you do?",o:[["🧩","Redesain pola dengan batu lebih sedikit|Redesign the pattern with fewer stones","PS2 CT1"],["⏳","Tunggu batu tambahan|Wait for more stones","PE1 OR1"],["🌿","Ganti sebagian dengan jalur tanaman|Swap part with plant paths","CT2"]]},
+ {t:"B",r:"g",q:"Taman selesai dan warga senang! Pilih proyek berikutnya.|The garden is done! Choose the next project.",o:[["🏫","Kantin sekolah yang ramai|A busy school canteen","HE1 OR1"],["🎮","Karakter game petualangan|An adventure game character","CR2"],["⚽","Lapangan futsal|A futsal court","BI2"],["🛍️","Kemasan produk warung|Warung product packaging","CR1 OR1"]]}
+]},
+{c:"HE",icon:"🤝",t:"Help the Friend",sub:"Jadilah Penolong|Be the Helper",badge:"Lencana Sahabat Terbaik|Best Friend Badge",
+ story:"Di Taman Bermain Desa Sungai Rimbun, banyak teman butuh bantuan! Malik dan Mintang mengajakmu berkeliling membantu. Siap jadi sahabat terbaik?|At the village playground, many friends need help! Malik and Mintang invite you to help around. Ready to be the best helper?",
+ items:[
+ {t:"I",r:"g",q:"Siapa yang kamu bantu lebih dulu?|Who do you help first?",o:[["🧒","Adik yang bingung menyusun puzzle|A little one stuck on a puzzle","HE2"],["👵","Nenek mengangkat belanjaan berat|A grandma lifting heavy groceries","HE1 BI1"],["🧹","Tim kebersihan kelas|The class cleaning team","HE1 LE1"],["🐈","Kucing terjebak di pohon|A cat stuck in a tree","HE1 EX1"]]},
+ {t:"I",r:"g",q:"Bagaimana cara paling seru menyemangati teman?|What is the most fun way to cheer up a friend?",o:[["🗣️","Ajak bicara dan mendengarkan|Talk and listen with them","HE2 CO1"],["🎁","Buat kartu lucu buatanmu|Make them a funny handmade card","CR1 HE1"],["🤝","Kerjakan tantangan bersama|Tackle a challenge together","HE1 CO1"]]},
+ {t:"I",r:"g",q:"Kegiatan tim mana yang paling kamu suka?|Which team activity do you like most?",o:[["⚽","Futsal antar kelas|Class-vs-class futsal","CO1 LE1"],["🎭","Pentas seni sekolah|The school art performance","CR1 CO1"],["🧹","Kerja bakti desa|A village clean-up","HE1 OR1"],["🔬","Klub riset kecil|A little research club","EX1 CO1"]]},
+ {t:"C",r:"sort",q:"Bagi tugas tim sesuai keahlian!|Assign the team tasks by strength!",bins:["Tugas Raka|Raka tasks","Tugas Zahra|Zahra tasks"],cards:[["🎨","Menggambar poster|Drawing the poster",0],["📊","Menghitung anggaran|Calculating the budget",1],["🖌️","Mewarnai dekorasi|Coloring decorations",0],["📋","Menyusun jadwal|Scheduling",1]],wf:"CO2 PS1",wp:"CO1"},
+ {t:"C",r:"ord",k:"seq",q:"Urutkan rencana membantu nenek berbelanja!|Order the plan to help grandma shop!",steps:[["🛒","Dorong kereta belanjanya|Push her shopping cart"],["💳","Bantu bayar di kasir|Help pay at the cashier"],["🎒","Antar belanjaannya ke rumah|Carry her groceries home"],["😊","Sapa dan pamit dengan manis|Say a kind goodbye"]],wf:"PS1 OR2",wp:"OR1"},
+ {t:"C",r:"g",q:"Raka malu tampil di depan kelas. Apa yang kamu lakukan?|Raka is shy about presenting in class. What do you do?",o:[["🗣️","Ajak latihan bersama|Practice together with him","CO2 HE1"],["🖼️","Sarankan ia memakai gambar|Suggest he uses drawings","CT1 HE1"],["⏳","Beri ia waktu sampai siap|Give him time until ready","HE1 DM1"]]},
+ {t:"C",r:"g",q:"Dua temanmu bertengkar soal pembagian tugas. Apa yang kamu lakukan?|Two friends argue about task sharing. What do you do?",o:[["👂","Dengarkan keduanya dulu|Listen to both sides first","CO2 DM1"],["🤝","Ajak cari jalan tengah|Help find a middle way","PS1 DM2"],["🙋","Laporkan ke guru|Tell the teacher","DM1"]]},
+ {t:"B",r:"g",q:"Temanmu frustrasi karena terus salah memasang bagian puzzle. Apa yang kamu lakukan?|A friend is frustrated — they keep misplacing puzzle parts. What do you do?",o:[["💪","Ayo coba lagi, bareng aku|Let us try again, together","HE1 PE1 CO1"],["👉","Tunjukkan letak yang benar|Show the right spot","PS1 HE1"],["🖐️","Kerjakan sisanya untuknya|Finish the rest for them","HE1"]]},
+ {t:"B",r:"g",q:"Satu anggota tim tidak mengerjakan bagiannya. Apa yang kamu lakukan?|One teammate is not doing their part. What do you do?",o:[["💬","Tanyai baik-baik dulu|Ask them kindly first","CO2 CU1"],["📋","Lapor ketua kelompok|Tell the group leader","LE1 DM1"],["✍️","Kerjakan sendiri tambahannya|Do the extra work yourself","PE1"]]},
+ {t:"B",r:"g",q:"Proyek tim selesai dan dipuji semua orang! Apa yang kamu lakukan?|The team project is done and everyone praises it! What do you do?",o:[["🌟","Puji kerja semua anggota|Praise every member","HE1 LE1"],["🎉","Ajak rayakan bersama|Celebrate together","HE2 CO1"],["📝","Catat evaluasi untuk nanti|Note lessons for next time","OR1 LE1"]]}
+]},
+{c:"MB",icon:"🚀",t:"Mini Business",sub:"Kelola Toko Kecilmu|Run Your Little Shop",badge:"Lencana Pengusaha Cilik|Little Entrepreneur Badge",
+ story:"Pasar Pagi Desa Sungai Rimbun membuka lapak kosong! Kamu diberi 100 token untuk membuka tokomu sendiri. Malik pegang peta lokasi, Mintang pegang buku kas. Ayo jadi pemilik toko! Token hanya untuk permainan!|The Morning Market has an empty stall! You get 100 play tokens to open your own shop. Malik holds the map, Mintang holds the cash book. Be a shop owner! Tokens are for play only!",
+ items:[
+ {t:"I",r:"g",q:"Apa yang akan kamu jual di tokomu?|What will your shop sell?",o:[["🍢","Jajanan pasar favorit warga|Favorite market snacks","HE1 OR1"],["🧃","Minuman segar racikanmu|Your own refreshing drinks","CR1 DM1"],["🎨","Kerajinan tangan buatanmu|Your handmade crafts","CR2"],["🧺","Kebutuhan harian keluarga|Daily family needs","OR2"]]},
+ {t:"I",r:"g",q:"Pilih nama untuk tokomu!|Pick a name for your shop!",o:[["🧠","Toko Pintar — nama meyakinkan|Toko Pintar — a confident name","LE1 DM1"],["🌈","Warung Pelangi — nama imajinatif|Warung Pelangi — an imaginative name","CR1"],["⚡","Kios Cepat Rapi — nama tertata|Kios Cepat Rapi — a tidy name","OR1 DM1"],["💬","Nama dari usulan pembeli|A name suggested by customers","CO1 HE1"]]},
+ {t:"I",r:"g",q:"Bagian memilik toko mana yang paling seru?|Which shop-owner job is the most fun?",o:[["📋","Mengatur stok barang|Arranging stock","OR2"],["💰","Menghitung untung dan rugi|Counting profit and loss","PS1 OR1"],["📣","Promosi ke para pembeli|Promoting to customers","LE2"],["🎨","Mendesain tampilan toko|Designing the shop look","CR2"]]},
+ {t:"C",r:"tok",q:"Belanja stok pertama! Bagi 100 token ke tiga kategori.|First stock run! Split 100 tokens across three categories.",cats:["Makanan|Food","Minuman|Drinks","Perlengkapan|Supplies"],wf:"DM2 PS1",wp:"DM1"},
+ {t:"C",r:"g",q:"Pembeli ramai dan antrean kacau! Apa yang kamu lakukan?|Customers flood in and the queue is a mess! What do you do?",o:[["🔢","Buat nomor antrean|Set up queue numbers","OR2"],["👀","Layani yang datang duluan|Serve whoever came first","DM1 HE1"],["🤝","Rekrut teman membantu|Recruit a friend to help","CO1 LE1"]]},
+ {t:"C",r:"ord",k:"seq",q:"Urutkan langkah membuka toko yang benar!|Order the correct shop-opening steps!",steps:[["🧺","Susun barang di rak|Arrange goods on shelves"],["🪧","Pasang papan nama dan harga|Put up signs and prices"],["🔓","Buka pintu toko|Open the shop"],["😄","Sambut pembeli pertama|Welcome the first customer"],["📝","Catat penjualan hari ini|Record today sales"]],wf:"OR2 PS1",wp:"OR1"},
+ {t:"C",r:"g",q:"Stok menipis, token terbatas. Apa yang kamu lakukan?|Stock is low and tokens are tight. What do you do?",o:[["📦","Beli hanya stok terlaris|Buy only the best-sellers","PS1 OR1"],["💬","Tanya pembeli paling butuh apa|Ask customers what they need","CU1 HE1"],["📣","Promosi besar supaya laku|Run a big promotion","LE1 DM1"]]},
+ {t:"B",r:"g",q:"Temanmu ingin ikut bekerja di tokomu. Apa yang kamu lakukan?|A friend wants to work at your shop. What do you do?",o:[["📋","Tentukan tugasnya dengan jelas|Give them a clear role","LE1 OR1"],["🧑‍🏫","Latih ia dengan sabar|Train them patiently","HE1 PE1"],["🎨","Biarkan ia bebas berkarya|Let them be creative freely","CO1 CT1"]]},
+ {t:"B",r:"g",q:"Sore hari penjualan sepi. Apa yang kamu lakukan?|Sales are slow all afternoon. What do you do?",o:[["🔄","Evaluasi dan ubah strategi|Evaluate and change strategy","PS1 PE1 DM1"],["⏳","Bersabar, besok mungkin ramai|Be patient, tomorrow may be busy","PE1"],["💬","Tanya pembeli alasannya|Ask customers why","CU1 CO1"]]},
+ {t:"B",r:"g",q:"Keuntungan 50 token! Apa yang kamu lakukan?|You made a 50-token profit! What do you do?",o:[["📦","Belanja stok baru|Buy new stock","OR1 DM2"],["🏦","Tabung untuk rencana besar|Save it for a big plan","OR1 PE1"],["🎁","Bagi hadiah ke pembeli setia|Reward loyal customers","HE1 LE1"],["🎨","Beli dekorasi toko baru|Buy new decorations","CR1 DM1"]]}
+]}];
+var MAPN=["🏗️ Lokasi Bangunan Tepi Sungai|Riverside Build Site","🔎 Kebun Sekolah Rahasia|Secret School Garden","🎨 Gudang Seni di Bukit|Hilltop Art Barn","🤝 Taman Bermain Desa|Village Playground","🏪 Pasar Pagi|Morning Market"];
+var DB;
+function load(){try{DB=JSON.parse(localStorage.getItem("tftq_v1"))}catch(e){DB=null}
+ if(!DB){DB={users:[],children:[],consents:[],sessions:[],obs:[],set:{lang:"id",strong:70,dev:40,ver:"TFTQ v0.1 Pilot",cur:null,admOn:false}}}
+ LANG=DB.set.lang||"id"}
+function save(){DB.set.lang=LANG;localStorage.setItem("tftq_v1",JSON.stringify(DB))}
+function bandOf(by,bm){var n=new Date(),a=n.getFullYear()-by-(n.getMonth()+1<bm?1:0);return a<=8?"6-8":a<=11?"9-11":"12-14"}
+function BANDL(b){return b==="6-8"?"Little Explorer (6–8)":b==="9-11"?"Young Explorer (9–11)":"Future Explorer (12–14)"}
+function CAT(c){var s=DB.set.strong,d=DB.set.dev;return c>=s?(LANG==="id"?"Relatif Menonjol":"Relatively Strong"):c>=d?(LANG==="id"?"Berkembang":"Developing"):(LANG==="id"?"Mulai Terlihat":"Emerging")}
+function adult(){document.body.classList.remove("cm")}
+function topbar(){var u=DB.users.filter(function(x){return x.email===DB.set.cur})[0];
+ $("#topbar").innerHTML='<div class="w"><div class="logo" onclick="vLanding()"><i>🧭</i>TAV Future Talent Quest™</div>'+
+ '<div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
+ '<button class="btn gh" style="padding:8px 16px" onclick="vGuide()">📖 '+(LANG==="id"?"Panduan":"Guide")+'</button>'+
+ (u?'<button class="btn gh" style="padding:8px 16px" onclick="vDash()">'+(LANG==="id"?"Dasbor":"Dashboard")+'</button>'+
+ (u.adm?'<button class="btn" style="padding:8px 16px" onclick="vAdmin(\'dash\')">Admin</button>':"")+
+ '<button class="btn te" style="padding:8px 16px" onclick="doLogout()">'+(LANG==="id"?"Keluar":"Logout")+'</button>'
+ :'<button class="btn gh" style="padding:8px 16px" onclick="vLogin()">'+(LANG==="id"?"Masuk":"Login")+'</button>'+
+ '<button class="btn" style="padding:8px 16px" onclick="vReg()">'+(LANG==="id"?"Daftar":"Register")+'</button>')+
+ '<div class="lsw"><button class="'+(LANG==="id"?"on":"")+'" onclick="swLang(\'id\')">ID</button><button class="'+(LANG==="en"?"on":"")+'" onclick="swLang(\'en\')">EN</button></div></div></div>'}
+function swLang(l){LANG=l;save();topbar();if(typeof RER==="function")RER()}
+function modal(html){$("#modal").innerHTML='<div class="mbox">'+html+'</div>';$("#modal").classList.add("on")}
+function cmodal(){$("#modal").classList.remove("on")}
+function vLanding(){RER=vLanding;adult();topbar();
+ $("#app").innerHTML='<div class="w"><div class="hero"><div>'+
+ '<h1>TAV Future Talent Quest™</h1><div class="tg">Main. Temukan. Jelajahi. — Play. Discover. Explore.</div>'+
+ '<p class="note" style="font-size:16px">'+(LANG==="id"?"Eksplorasi Ketertarikan, Kekuatan & Pembelajaran Berbasis Game untuk Anak usia 6–14 tahun":"Game-Based Interest, Strength & Learning Exploration for Children aged 6–14")+'</p>'+
+ '<div class="cta"><button class="btn big te" onclick="vReg()">🚀 '+(LANG==="id"?"Mulai Petualangan":"Start Your Quest")+'</button>'+
+ '<button class="btn big gh" onclick="vAbout()">'+(LANG==="id"?"Untuk Orang Tua":"For Parents")+'</button></div>'+
+ '<p style="margin-top:10px"><a href="#" onclick="vGuide();return false">📖 '+(LANG==="id"?"Lihat Panduan 15 Langkah":"View the 15-Step Guide")+'</a></p></div>'+
+ '<div class="scn"><div class="s"></div><div class="m" style="left:10px;width:230px;height:120px"></div><div class="m" style="left:140px;width:170px;height:85px;background:#2E6B50"></div><div class="e2">🪁</div><div class="e3">🛖</div><div class="e1">🧑‍🌾</div></div></div>'+
+ '<h2>'+(LANG==="id"?"Cara Kerjanya":"How It Works")+'</h2><div class="grid3">'+
+ '<div class="card"><b>01</b> — '+(LANG==="id"?"Orang tua membuat akun & profil anak":"Parent creates account & child profile")+'</div>'+
+ '<div class="card"><b>02</b> — '+(LANG==="id"?"Anak menjalani 5 misi game (±50 interaksi)":"Child plays 5 game quests (±50 interactions)")+'</div>'+
+ '<div class="card"><b>03</b> — '+(LANG==="id"?"Profil & laporan otomatis + observasi orang tua":"Automatic profile & report + parent observation")+'</div></div>'+
+ '<h2 style="margin-top:26px">'+(LANG==="id"?"5 Misi Petualangan":"5 Adventure Quests")+'</h2><div class="grid5">'+
+ GAMES.map(function(g){return '<div class="gm"><div class="gi">'+g.icon+'</div><b>'+g.t+'</b><div class="note">'+T(g.sub)+'</div></div>'}).join("")+
+ '</div><div class="disc"><b>'+(LANG==="id"?"Catatan penting:":"Important note:")+'</b> '+
+ (LANG==="id"?"Ini asesmen eksplorasi berbasis game (MVP/Pilot). BUKAN tes IQ, BUKAN diagnosis psikologis, BUKAN prediksi karier, dan tidak membandingkan anak. Hasilnya profil eksplorasi: Child Development & Interest Profile.":"This is a game-based exploration assessment (MVP/Pilot). It is NOT an IQ test, NOT a psychological diagnosis, NOT a career prediction, and never compares children. Results are an exploratory Child Development & Interest Profile.")+'</div>'+
+ '<footer><div class="w"><span>TAV Education — 2026</span><span>'+DB.set.ver+' · <a href="#" style="color:#F7C948" onclick="vGuide();return false">📖 '+(LANG==="id"?"Panduan":"Guide")+'</a> · <a href="#" style="color:#F7C948" onclick="vAdminLogin();return false">Admin</a></span></div></footer></div>'}
+function vAbout(){RER=vAbout;adult();topbar();
+ $("#app").innerHTML='<div class="w2"><h2>'+(LANG==="id"?"Untuk Orang Tua":"For Parents")+'</h2><div class="card">'+
+ '<p><b>'+(LANG==="id"?"Apa ini?":"What is this?")+'</b><br>'+(LANG==="id"?"Platform eksplorasi ketertarikan & kekuatan anak usia 6–14 melalui 5 mini-game. Anak bermain; sistem mencatat pilihan dan perilaku; hasilnya menjadi profil eksplorasi untuk orang tua.":"An interest & strength exploration platform for children aged 6–14 through 5 mini-games. The child plays; the system records choices; results become an exploratory profile for parents.")+'</p>'+
+ '<p style="margin-top:10px"><b>'+(LANG==="id"?"Keamanan & privasi":"Safety & privacy")+'</b><br>'+(LANG==="id"?"Persetujuan orang tua wajib sebelum anak bermain. Data minimum (nama panggilan, tahun lahir). Laporan hanya bisa diakses orang tua akun yang sama.":"Parental consent is required before the child plays. Minimal data. Reports only accessible to the parent of the same account.")+'</p>'+
+ '<p style="margin-top:10px"><b>'+(LANG==="id"?"Batasan":"Limitations")+'</b><br>'+(LANG==="id"?"Versi ini pilot (v0.1). Kategori skor adalah kategori operasional MVP, bukan norma tervalidasi.":"This is a pilot (v0.1). Score categories are MVP operational categories, not validated norms.")+'</p></div>'+
+ '<button class="btn" onclick="vLanding()">← '+(LANG==="id"?"Kembali":"Back")+'</button></div>'}
+function vReg(){RER=vReg;adult();topbar();
+ $("#app").innerHTML='<div class="w2"><h2>'+(LANG==="id"?"Daftar Orang Tua":"Parent Registration")+'</h2><div class="card">'+
+ '<label class="f">'+(LANG==="id"?"Nama lengkap":"Full name")+'</label><input id="r1" type="text">'+
+ '<label class="f">Email</label><input id="r2" type="email">'+
+ '<label class="f">'+(LANG==="id"?"Kata sandi (min. 6)":"Password (min. 6)")+'</label><input id="r3" type="password">'+
+ '<div class="err" id="re"></div><button class="btn" onclick="doReg()">'+(LANG==="id"?"Daftar & Masuk":"Register & Login")+'</button></div>'+
+ '<p class="note" style="margin-top:10px">'+(LANG==="id"?"Data anak hanya nama panggilan & tanggal lahir (minimisasi data).":"Child data is limited to nickname & birth date (data minimization).")+'</p></div>'}
+function vLogin(){RER=vLogin;adult();topbar();
+ $("#app").innerHTML='<div class="w2"><h2>'+(LANG==="id"?"Masuk":"Login")+'</h2><div class="card">'+
+ '<label class="f">Email</label><input id="l1" type="email"><label class="f">'+(LANG==="id"?"Kata sandi":"Password")+'</label><input id="l2" type="password">'+
+ '<div class="err" id="le"></div><button class="btn" onclick="doLogin()">'+(LANG==="id"?"Masuk":"Login")+'</button>'+
+ '<p class="note" style="margin-top:8px">'+(LANG==="id"?"Belum punya akun?":"No account?")+' <a href="#" onclick="vReg();return false">'+(LANG==="id"?"Daftar":"Register")+'</a></p></div></div>'}
+function doReg(){var n=$("#r1").value.trim(),e=$("#r2").value.trim(),p=$("#r3").value;
+ if(!n||!e||p.length<6){$("#re").textContent=LANG==="id"?"Lengkapi semua kolom (sandi min. 6).":"Fill all fields (password min. 6).";return}
+ if(DB.users.some(function(u){return u.email===e})){$("#re").textContent=LANG==="id"?"Email sudah terdaftar.":"Email already registered.";return}
+ var u={id:uid(),name:n,email:e,pass:p,adm:false};DB.users.push(u);DB.set.cur=e;save();
+ sheetSend("pendaftaran",["Waktu Kirim","Nama Orang Tua","Email"],[[new Date().toLocaleString(),u.name,u.email]]);vDash()}
+function doLogin(){var e=$("#l1").value.trim(),p=$("#l2").value,u=null;
+ DB.users.forEach(function(x){if(x.email===e&&x.pass===p)u=x});
+ if(!u){$("#le").textContent=LANG==="id"?"Email atau sandi salah.":"Wrong email or password.";return}
+ DB.set.cur=e;if(u.adm)DB.set.admOn=true;save();u.adm?vAdmin("dash"):vDash()}
+function doLogout(){DB.set.cur=null;DB.set.admOn=false;save();vLanding()}
+function me(){return DB.users.filter(function(u){return u.email===DB.set.cur})[0]}
+function myKids(){var m=me();return m?DB.children.filter(function(c){return c.parentId===m.id}):[]}
+function lastSes(cid){var s=DB.sessions.filter(function(x){return x.childId===cid});return s.length?s[s.length-1]:null}
+function vDash(){RER=vDash;adult();topbar();var kids=myKids(),h='';
+ h+='<div class="w"><h2>'+(LANG==="id"?"Dasbor Orang Tua":"Parent Dashboard")+'</h2>'+
+ '<button class="btn" onclick="vChildNew()">＋ '+(LANG==="id"?"Tambah Profil Anak":"Add Child Profile")+'</button>';
+ if(!kids.length)h+='<p class="note" style="margin-top:12px">'+(LANG==="id"?"Belum ada profil anak.":"No child profile yet.")+'</p>';
+ kids.forEach(function(c){var con=DB.consents.filter(function(x){return x.childId===c.id})[0],s=lastSes(c.id),act="";
+  var sesCount=DB.sessions.filter(function(x){return x.childId===c.id}).length;
+  if(!con)act='<button class="btn te" onclick="vConsent(\''+c.id+'\')">'+(LANG==="id"?"1. Beri Persetujuan":"1. Give Consent")+'</button>';
+  else if(!s)act='<button class="btn" onclick="launch(\''+c.id+'\')">'+(LANG==="id"?"2. Mulai Mode Anak":"2. Start Child Mode")+'</button>';
+  else if(s.status==="in_progress")act='<button class="btn" onclick="launch(\''+c.id+'\')">'+(LANG==="id"?"▶ Lanjutkan Misi":"▶ Resume Quest")+'</button> <span class="pill y">'+(LANG==="id"?"berjalan":"in progress")+'</span>';
+  else{var ob=DB.obs.some(function(o){return o.sessionId===s.id});
+   act='<button class="btn gh" onclick="vObserve(\''+s.id+'\')">'+(ob?"✓ "+(LANG==="id"?"Observasi":"Observation"):"3. "+(LANG==="id"?"Isi Observasi":"Fill Observation"))+'</button> '+
+   '<button class="btn" onclick="vReport(\''+s.id+'\')">'+(LANG==="id"?"4. Lihat Laporan":"4. View Report")+'</button> '+
+   '<button class="btn te" onclick="launch(\''+c.id+'\')">'+(LANG==="id"?"Asesmen Baru":"New Assessment")+'</button>';}
+  h+='<div class="card" style="margin-top:14px"><div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">'+
+  '<div style="font-size:40px">'+(c.buddy==="M"?"👦":c.buddy==="T"?"👧":"🧒")+'</div>'+
+  '<div><b style="font-family:Fredoka;font-size:18px;color:var(--can)">'+esc(c.nick)+'</b><br><span class="pill">'+BANDL(c.band)+'</span> '+
+  (s&&s.status==="completed"?'<span class="pill">'+(LANG==="id"?"Selesai ✓":"Completed ✓")+'</span>':'')+
+  '<div class="note">'+(LANG==="id"?"Sesi":"Session")+': '+(s?s.code:"—")+(sesCount>1?" ("+sesCount+")":"")+'</div></div>'+
+  '<div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap">'+act+'</div></div></div>'});
+ h+='</div>';$("#app").innerHTML=h}
+function vChildNew(){RER=vChildNew;adult();topbar();
+ $("#app").innerHTML='<div class="w2"><h2>'+(LANG==="id"?"Profil Anak":"Child Profile")+'</h2><div class="card">'+
+ '<label class="f">'+(LANG==="id"?"Nama panggilan anak":"Child nickname")+'</label><input id="c1" type="text" maxlength="20">'+
+ '<label class="f">'+(LANG==="id"?"Tahun lahir":"Birth year")+'</label><input id="c2" type="number" min="2012" max="2026" value="2016">'+
+ '<label class="f">'+(LANG==="id"?"Bulan lahir":"Birth month")+'</label><select id="c3">'+(function(){var s="";for(var i=1;i<=12;i++)s+='<option value="'+i+'">'+i+'</option>';return s})()+'</select>'+
+ '<div class="note" style="margin-top:8px">'+(LANG==="id"?"Kelompok usia otomatis:":"Age group automatic:")+' 6–8 Little · 9–11 Young · 12–14 Future Explorer</div>'+
+ '<div class="err" id="ce"></div><button class="btn" onclick="addChild()">'+(LANG==="id"?"Simpan Profil":"Save Profile")+'</button></div></div>'}
+function addChild(){var n=$("#c1").value.trim(),by=+$("#c2").value,bm=+$("#c3").value;
+ if(!n||!by){$("#ce").textContent=LANG==="id"?"Isi nama panggilan & tahun lahir.":"Fill nickname & birth year.";return}
+ var c={id:uid(),parentId:me().id,nick:n,by:by,bm:bm,band:bandOf(by,bm),buddy:null};
+ DB.children.push(c);save();
+ sheetSend("anak",["Waktu Kirim","Nama Anak","Nama Orang Tua","Usia","Kelompok Usia","Tahun Lahir","Bulan Lahir","Sahabat"],
+ [[new Date().toLocaleString(),c.nick,me().name,sheetAge(c),BANDL(c.band),c.by,c.bm,""]]);vConsent(c.id)}
+function vConsent(cid){RER=function(){vConsent(cid)};adult();topbar();var c=DB.children.filter(function(x){return x.id===cid})[0];
+ $("#app").innerHTML='<div class="w2"><h2>'+(LANG==="id"?"Persetujuan Orang Tua":"Parental Consent")+'</h2><div class="card">'+
+ '<b>'+esc(c.nick)+' — '+BANDL(c.band)+' ✓</b><div class="note">'+(LANG==="id"?"(Konfirmasi usia otomatis dari tahun lahir)":"(Age confirmation automatic from birth year)")+'</div>'+
+ '<p style="margin-top:10px;font-size:14.5px">'+(LANG==="id"?"Dengan ini saya menyetujui anak saya mengikuti <b>TAV Future Talent Quest™</b> — asesmen eksplorasi ketertarikan & kekuatan berbasis game. Saya memahami: (1) ini BUKAN diagnosis, tes IQ, atau prediksi karier; (2) data yang dikumpulkan adalah respons permainan, waktu respons, jumlah percobaan & penggunaan bantuan untuk riset perbaikan; (3) data hanya dapat dilihat oleh saya dan TAV Education; (4) saya dapat meminta penghapusan data; (5) hasil berupa profil eksplorasi untuk membantu kegiatan belajar anak.":"I consent to my child participating in <b>TAV Future Talent Quest™</b> — a game-based interest & strength exploration. I understand: (1) it is NOT a diagnosis, IQ test, or career prediction; (2) data collected are game responses, response times, attempts & help usage for research; (3) data is visible only to me and TAV Education; (4) I may request deletion; (5) results are an exploratory profile.")+'</p>'+
+ '<label style="display:flex;gap:8px;margin-top:12px;font-weight:800;align-items:center"><input type="checkbox" id="ck" style="width:20px;height:20px"> '+(LANG==="id"?"Saya telah membaca dan memahami informasi di atas.":"I have read and understood the information above.")+'</label>'+
+ '<div class="err" id="ke"></div><button class="btn" onclick="doConsent(\''+cid+'\')">'+(LANG==="id"?"Setuju & Lanjutkan":"Agree & Continue")+'</button></div></div>'}
+function doConsent(cid){if(!$("#ck").checked){$("#ke").textContent=LANG==="id"?"Centang persetujuan dulu.":"Please tick the consent first.";return}
+ DB.consents.push({id:uid(),childId:cid,ver:"consent-v0.1",ts:Date.now()});save();
+ var c=DB.children.filter(function(x){return x.id===cid})[0];
+ sheetSend("persetujuan",["Waktu Kirim","Nama Anak","Nama Orang Tua","Versi Persetujuan"],
+ [[new Date().toLocaleString(),c?c.nick:"",me().name,"consent-v0.1"]]);launch(cid)}
+function launch(cid){var c=DB.children.filter(function(x){return x.id===cid})[0],s=lastSes(cid);
+ if(!s||s.status!=="in_progress"){s={id:uid(),code:"TFTQ-2026-"+String(DB.sessions.length+1).padStart(6,"0"),childId:cid,startedAt:Date.now(),status:"in_progress",responses:[],gamesDone:[],brk:0,buddy:c.buddy,ver:DB.set.ver};DB.sessions.push(s)}
+ S=s;save();document.body.classList.add("cm");S.buddy?cwMap():cwWelcome()}
+function chHead(title,prog){
+ return '<div class="chh"><span class="q">'+title+'</span><span class="st">★'+S.responses.length+'</span><div class="pgw"><i style="width:'+prog+'%"></i></div>'+
+ '<button class="hbtn" onclick="useHelp()">❓</button><div class="lsw"><button class="'+(LANG==="id"?"on":"")+'" onclick="swLang(\'id\')">ID</button><button class="'+(LANG==="en"?"on":"")+'" onclick="swLang(\'en\')">EN</button></div>'+
+ '<button class="hbtn" onclick="parentGate()">🚪 '+(LANG==="id"?"Ortu":"Parent")+'</button></div>'}
+function cwWelcome(){RER=cwWelcome;
+ $("#childroot").innerHTML=chHead("👋 "+(LANG==="id"?"Halo, Explorer!":"Hi, Explorer!"),0)+
+ '<div class="w2" style="text-align:center"><div class="prompt">'+(LANG==="id"?"Pilih sahabat petualangmu!":"Pick your adventure buddy!")+'</div><div class="buddyrow">'+
+ '<div class="buddy" onclick="setBuddy(\'M\')"><div class="av">👦</div><b style="font-family:Fredoka;font-size:20px;color:var(--can)">MALIK</b><div class="note">'+(LANG==="id"?"Si Penunjuk Arah 🗺️ — putih cerah, poni korea":"The Guide 🗺️ — fair skin, K-pop bangs")+'</div></div>'+
+ '<div class="buddy" onclick="setBuddy(\'T\')"><div class="av">👧</div><b style="font-family:Fredoka;font-size:20px;color:var(--can)">MINTANG</b><div class="note">'+(LANG==="id"?"Si Pencatat Petunjuk 📓 — sawo hangat, kuncir satu":"The Note-Taker 📓 — warm tan skin, one ponytail")+'</div></div>'+
+ '</div></div>'}
+function setBuddy(b){S.buddy=b;var c=DB.children.filter(function(x){return x.id===S.childId})[0];if(c)c.buddy=b;save();cwTutorial()}
+function cwTutorial(){RER=cwTutorial;var bn=S.buddy==="M"?"Malik":"Mintang";
+ $("#childroot").innerHTML=chHead("🎓 "+(LANG==="id"?"Tutorial":"Tutorial"),0)+
+ '<div class="w2" style="text-align:center"><div style="font-size:60px">'+(S.buddy==="M"?"👦":"👧")+'</div>'+
+ '<div class="prompt">'+bn+': "'+(LANG==="id"?"Ada 5 misi menunggumu! Cukup: pilih, seret, bangun, dan coba lagi. Ayo!":"5 quests await you! Just: choose, drag, build, and try again. Let us go!")+'"</div>'+
+ '<div class="grid3"><div class="gm"><div class="gi">👆</div><b>'+(LANG==="id"?"Pilih":"Choose")+'</b></div>'+
+ '<div class="gm"><div class="gi">🧩</div><b>'+(LANG==="id"?"Bangun & urutkan":"Build & order")+'</b></div>'+
+ '<div class="gm"><div class="gi">🔁</div><b>'+(LANG==="id"?"Coba lagi boleh!":"Retrying is OK!")+'</b></div></div>'+
+ '<button class="btn big te" style="margin-top:18px" onclick="cwMap()">🗺️ '+(LANG==="id"?"Buka Peta Misi":"Open Quest Map")+'</button></div>'}
+function cwMap(){RER=cwMap;var done=S.gamesDone.length;
+ var h=chHead("🗺️ "+(LANG==="id"?"Peta Misi Nusantara":"Nusantara Quest Map"),done*20)+'<div class="w2">'+
+ '<div style="text-align:center;margin:10px 0"><span class="pill">★ '+S.responses.length+' / 50</span></div><div class="map">';
+ GAMES.forEach(function(g,i){var st=S.gamesDone.indexOf(i)>=0,oc=(i===done&&st===false);
+  h+='<div class="node '+(st?"done":oc?"open":"")+'"'+(oc?' onclick="cwGame('+i+')"':'')+'>'+
+  '<div class="ni">'+g.icon+'</div><div><b>'+(i+1)+'. '+g.t+'</b><div class="note">'+(st?"✓ "+T(g.badge):T(MAPN[i]))+'</div></div>'+
+  '<div style="margin-left:auto;font-size:26px">'+(st?"🏅":oc?"▶":"🔒")+'</div></div>'});
+ h+='</div>'+(done<5?'<p class="note" style="text-align:center">'+(LANG==="id"?"Selesaikan misi berurutan untuk membuka lokasi berikutnya!":"Complete quests in order to unlock the next location!")+'</p>'
+ :'<div style="text-align:center"><button class="btn big te" onclick="cwComplete()">🏆 '+(LANG==="id"?"Lihat Hasil Petualanganmu!":"See Your Quest Results!")+'</button></div>')+'</div>';
+ $("#childroot").innerHTML=h}
+function cwGame(gi){var done=S.responses.filter(function(r){return r.g===gi}).length;
+ if(done>=10){if(S.gamesDone.indexOf(gi)<0){S.gamesDone.push(gi);save()}cwMap();return}
+ G={gi:gi,ii:done,t0:Date.now(),at:1,help:false,answered:false,st:{}};renderItem()}
+function renderItem(){var it=GAMES[G.gi].items[G.ii];G.t0=Date.now();G.at=1;G.help=false;G.answered=false;G.st={};
+ $("#childroot").innerHTML=itemHtml(it)}
+function itemHtml(it){var g=GAMES[G.gi],body="";
+ if(it.r==="g"){body='<div class="choices">'+it.o.map(function(o,i){return '<button class="choice" id="ch'+i+'" onclick="pickOpt('+i+')"><span class="ci">'+o[0]+'</span><span>'+esc(T(o[1]))+'</span></button>'}).join("")+'</div>'}
+ else if(it.r==="ord"&&it.k==="build"){G.st.slots=[];
+  var seen={},pcs=[];it.pat.forEach(function(p){if(!seen[p]){seen[p]=1;pcs.push(p)}});
+  pcs=pcs.slice().sort(function(){return Math.random()-0.5});
+  body='<div class="widget"><div class="note">'+(LANG==="id"?"Denah / pola:":"The plan / pattern:")+'</div><div class="slots">'+it.pat.map(function(p){return '<div class="slot" style="opacity:.55">'+p+'</div>'}).join("")+'</div>'+
+  '<div class="note">'+(LANG==="id"?"Ketuk balok untuk mengisi slot sesuai pola:":"Tap blocks to fill the slots to match the pattern:")+'</div>'+
+  '<div class="slots" id="fill"></div><div class="pieces">'+pcs.map(function(p){return '<button class="pc" onclick="ordPut(\''+p+'\')">'+p+'</button>'}).join("")+'</div>'+
+  '<button class="btn gh" onclick="ordReset()">↺</button></div>'}
+ else if(it.r==="ord"&&it.k==="seq"){G.st.pool=it.steps.slice().sort(function(){return Math.random()-0.5});G.st.order=[];
+  body='<div class="widget"><div class="note">'+(LANG==="id"?"Ketuk langkah dalam urutan yang benar:":"Tap the steps in the correct order:")+'</div>'+
+  '<div class="slots" id="fill"></div><div class="pieces">'+G.st.pool.map(function(s,i){return '<button class="pc" style="width:auto;padding:6px 12px;font-size:14px;font-weight:800" onclick="seqPut('+i+')">'+s[0]+' '+esc(T(s[1]))+'</button>'}).join("")+'</div></div>'}
+ else if(it.r==="hot"){G.st.sel=[];
+  body='<div class="widget"><div class="note">'+(LANG==="id"?"Pilih tepat 4 yang menurutmu petunjuk:":"Pick exactly 4 that you think are clues:")+' <b id="hn">0</b>/4</div>'+
+  '<div class="tiles">'+it.tiles.map(function(t,i){return '<button class="tile" id="ht'+i+'" onclick="hotT('+i+')"><span class="ti">'+t[0]+'</span>'+esc(T(t[1]))+'</button>'}).join("")+'</div>'+
+  '<button class="btn" id="hb" disabled onclick="checkHot()">'+(LANG==="id"?"Periksa!":"Check!")+'</button></div>'}
+ else if(it.r==="sort"){G.st.ci=0;G.st.right=0;body='<div class="widget" id="sw"></div>';setTimeout(renderSort,0)}
+ else if(it.r==="tok"){G.st.val=[50,25,25];body='<div class="widget" id="tw"></div>';setTimeout(renderTok,0)}
+ return chHead(g.icon+" "+g.t+" — "+(LANG==="id"?"Misi":"Quest")+" "+(G.gi+1)+"/5 · "+(G.ii+1)+"/10",(G.gi*10+G.ii)*2)+
+ '<div class="w2"><div class="scene">'+g.icon+'</div><div class="prompt">'+esc(T(it.q))+'</div>'+body+'</div>'}
+function pickOpt(i){if(G.answered)return;G.answered=true;var it=GAMES[G.gi].items[G.ii];
+ var els=document.querySelectorAll(".choice");for(var k=0;k<els.length;k++)els[k].classList.remove("sel");
+ var el=$("#ch"+i);if(el)el.classList.add("sel");
+ record(i,pick(it.o[i][2]),null)}
+function drawBuild(){var it=GAMES[G.gi].items[G.ii];
+ $("#fill").innerHTML=G.st.slots.map(function(p){return '<div class="slot ok">'+p+'</div>'}).join("")+
+ it.pat.slice(G.st.slots.length).map(function(){return '<div class="slot"></div>'}).join("")}
+function ordPut(p){if(G.answered)return;var it=GAMES[G.gi].items[G.ii];
+ if(G.st.slots.length>=it.pat.length)return;G.st.slots.push(p);drawBuild();
+ if(G.st.slots.length===it.pat.length)setTimeout(checkOrd,350)}
+function ordReset(){if(G.answered)return;G.st.slots=[];G.at++;drawBuild()}
+function checkOrd(){if(G.answered)return;G.answered=true;var it=GAMES[G.gi].items[G.ii];
+ var ok=it.pat.every(function(p,i){return G.st.slots[i]===p});if(!ok)G.at++;
+ record(null,pick(ok?it.wf:it.wp),ok?"F":"P")}
+function seqPut(i){if(G.answered)return;var it=GAMES[G.gi].items[G.ii];
+ if(G.st.order.length>=it.steps.length)return;G.st.order.push(G.st.pool[i]);
+ $("#fill").innerHTML=G.st.order.map(function(s){return '<div class="slot ok" style="width:auto;padding:4px 10px;font-size:13px;font-weight:800">'+s[0]+' '+esc(T(s[1]))+'</div>'}).join("");
+ if(G.st.order.length===it.steps.length)setTimeout(finishSeq,350)}
+function finishSeq(){if(G.answered)return;G.answered=true;var it=GAMES[G.gi].items[G.ii];
+ var ok=it.steps.every(function(s,k){return G.st.order[k][0]===s[0]});if(!ok)G.at++;
+ record(null,pick(ok?it.wf:it.wp),ok?"F":"P")}
+function hotT(i){if(G.answered)return;var pos=G.st.sel.indexOf(i);
+ if(pos>=0)G.st.sel.splice(pos,1);else if(G.st.sel.length<4)G.st.sel.push(i);
+ var el=$("#ht"+i);if(el)el.classList.toggle("sel",G.st.sel.indexOf(i)>=0);
+ $("#hn").textContent=G.st.sel.length;$("#hb").disabled=(G.st.sel.length!==4)}
+function checkHot(){if(G.answered)return;G.answered=true;var it=GAMES[G.gi].items[G.ii];
+ var n=0;G.st.sel.forEach(function(i){if(it.tiles[i][2])n++});
+ record(G.st.sel.slice(),pick(n>=4?it.wf:it.wp),n>=4?"F":"P")}
+function renderSort(){if(G.answered)return;var it=GAMES[G.gi].items[G.ii];
+ if(G.st.ci>=it.cards.length){var ok=G.st.right>=it.cards.length-1;
+  record(null,pick(ok?it.wf:it.wp),ok?"F":"P");return}
+ var c=it.cards[G.st.ci];
+ $("#sw").innerHTML='<div class="note">'+(LANG==="id"?"Kartu":"Card")+' '+(G.st.ci+1)+'/'+it.cards.length+' — <b>'+(LANG==="id"?"kartu ini masuk kelompok mana?":"which group does this card belong to?")+'</b></div>'+
+ '<div style="font-size:44px;margin:8px">'+c[0]+'</div><b>'+esc(T(c[1]))+'</b>'+
+ '<div class="bins">'+it.bins.map(function(b,i){return '<button class="btn '+(i?"gh":"")+'" onclick="binPick('+i+')">'+esc(T(b))+'</button>'}).join("")+'</div>'}
+function binPick(i){if(G.answered)return;var it=GAMES[G.gi].items[G.ii];
+ if(it.cards[G.st.ci][2]===i)G.st.right++;G.st.ci++;renderSort()}
+function renderTok(){if(G.answered)return;var it=GAMES[G.gi].items[G.ii];
+ var tot=G.st.val[0]+G.st.val[1]+G.st.val[2];
+ $("#tw").innerHTML='<div class="note"><b>💰 '+(LANG==="id"?"Total terpakai":"Total allocated")+': '+tot+' / 100</b></div>'+
+ it.cats.map(function(c,i){return '<div class="tokrow"><span>'+esc(T(c))+'</span><span>'+
+ '<button class="hbtn" onclick="tokAdj('+i+',-25)">−</button> <b>'+G.st.val[i]+'</b> <button class="hbtn" onclick="tokAdj('+i+',25)">＋</button></span></div>'}).join("")+
+ '<button class="btn" '+(tot===100?"":"disabled")+' onclick="tokDone()">'+(LANG==="id"?"Selesai!":"Done!")+'</button>'}
+function tokAdj(i,d){if(G.answered)return;
+ var nv=Math.max(0,Math.min(100,G.st.val[i]+d));
+ var others=G.st.val[0]+G.st.val[1]+G.st.val[2]-G.st.val[i];
+ if(others+nv<=100){G.st.val[i]=nv;G.at++}renderTok()}
+function tokDone(){if(G.answered)return;G.answered=true;var it=GAMES[G.gi].items[G.ii];
+ var bal=G.st.val.every(function(v){return v>0});
+ record(G.st.val.slice(),pick(bal?it.wf:it.wp),bal?"F":"P")}
+function useHelp(){G.help=true;var bn=S.buddy==="M"?"👦 Malik":"👧 Mintang";
+ modal('<div style="font-size:50px">'+(S.buddy==="M"?"👦":"👧")+'</div><div class="prompt" style="font-size:18px">'+bn+': "'+(LANG==="id"?"Lihat baik-baik petunjuknya. Kamu pasti bisa!":"Look closely at the hints. You can do it!")+'"</div><button class="btn" onclick="cmodal()">OK</button>')}
+function record(o,s,tier){S.responses.push({g:G.gi,ii:G.ii,r:o,s:s,tier:tier,ms:Date.now()-G.t0,help:G.help,at:G.at,ts:Date.now()});save();
+ var it=GAMES[G.gi].items[G.ii];
+ fb(tier==="F"?"F":tier==="P"?"P":it.t==="I"?"I":"B")}
+function fb(bank){var arr=FBK[bank],e=arr[Math.floor(Math.random()*arr.length)];
+ var em=["🎉","⭐","✨","🌟","🚀"][Math.floor(Math.random()*5)];
+ $("#fb").innerHTML='<div class="fbi"><div class="fe">'+em+'</div><div class="ft">'+(LANG==="id"?e[0]:e[1])+'</div></div>';
+ $("#fb").classList.add("on");
+ setTimeout(function(){$("#fb").classList.remove("on");
+  if(G.ii>=9)finishGame();else{G.ii++;renderItem()}},1300)}
+function finishGame(){if(S.gamesDone.indexOf(G.gi)<0)S.gamesDone.push(G.gi);save();var g=GAMES[G.gi];
+ $("#childroot").innerHTML=chHead("🏅",100)+
+ '<div class="w2" style="text-align:center"><div style="font-size:80px">'+g.icon+'</div>'+
+ '<div class="prompt">'+(LANG==="id"?"Misi selesai!":"Quest complete!")+'</div>'+
+ '<div class="rbadge" style="animation:pop .5s"><div class="ri">🏅</div><b style="font-family:Fredoka;color:var(--can)">'+T(g.badge)+'</b></div>'+
+ '<div class="bslots">'+GAMES.map(function(x,i){return '<div class="bslot '+(S.gamesDone.indexOf(i)>=0?"on":"")+'">'+x.icon+'</div>'}).join("")+'</div>'+
+ '<div style="font-size:44px">'+(S.buddy==="M"?"👦":"👧")+' 🎉</div>'+
+ '<button class="btn big te" onclick="afterBadge('+G.gi+')">'+(LANG==="id"?"Lanjut!":"Continue!")+'</button></div>'}
+function afterBadge(gi){if(gi===1&&S.gamesDone.length===2&&!S.brk){S.brk=1;save();
+  modal('<div style="font-size:56px">🥤🧃</div><div class="prompt" style="font-size:20px">'+(LANG==="id"?"Waktunya istirahat sebentar! Minum dulu, ya — petualanganmu tersimpan kok.":"Time for a short break! Have a drink — your adventure is saved.")+'</div><button class="btn" onclick="cmodal();cwMap()">OK</button>');return}
+ if(gi===4)cwComplete();else cwMap()}
+function cwComplete(){RER=cwComplete;finalize();
+ $("#childroot").innerHTML=chHead("🏆",100)+
+ '<div class="w2" style="text-align:center"><div style="font-size:64px">🎊 🎉 🎊</div>'+
+ '<div class="prompt" style="font-size:26px">'+(LANG==="id"?"PETUALANGAN SELESAI!":"QUEST COMPLETE!")+'</div>'+
+ '<div style="font-size:52px">👦 🤝 👧</div>'+
+ '<p>'+(LANG==="id"?"Malik & Mintang sangat bangga padamu! Semua 5 lencana kamu dapat — karena <b>keikutsertaan dan penyelesaian misi</b>, bukan karena nilai.":"Malik & Mintang are so proud of you! You earned all 5 badges — for <b>participation and completing quests</b>, not for scores.")+'</p>'+
+ '<div class="bslots">'+GAMES.map(function(x){return '<div class="bslot on">'+x.icon+'</div>'}).join("")+'</div>'+
+ '<button class="btn big" onclick="cwResult()">✨ '+(LANG==="id"?"Lihat Hasilmu":"See Your Results")+'</button></div>'}
+function maxForItem(it){var m={};
+ if(it.r==="g"){it.o.forEach(function(o){pick(o[2]).forEach(function(x){if((m[x[0]]||0)<x[1])m[x[0]]=x[1]})})}
+ else{pick(it.wf).forEach(function(x){if((m[x[0]]||0)<x[1])m[x[0]]=x[1]})}
+ return m}
+function computeScores(ses){var raw={},max={};
+ GAMES.forEach(function(g){g.items.forEach(function(it){var m=maxForItem(it);for(var c in m)max[c]=(max[c]||0)+m[c]})});
+ ses.responses.forEach(function(r){r.s.forEach(function(x){raw[x[0]]=(raw[x[0]]||0)+x[1]})});
+ var norm={},cat={};for(var c in max){norm[c]=Math.round((raw[c]||0)/max[c]*100);cat[c]=CAT(norm[c])}
+ var ik=Object.keys(CI),sk=Object.keys(CS);
+ var ti=ik.slice().sort(function(a,b){return (norm[b]||0)-(norm[a]||0)});
+ var ts=sk.slice().sort(function(a,b){return (norm[b]||0)-(norm[a]||0)});
+ var dev=DB.set.dev,ip=null,sp=null;
+ var t0=ti[0],t1=ti[1],pair=[t0,t1].sort().join("_");
+ if((norm[t0]||0)>=dev&&(norm[t1]||0)>=dev){
+  if(pair==="BI_EX")ip=(norm.BI>=norm.EX)?"Bangun & Solusi|Build & Solve":"Jelajah & Solusi|Explore & Solve";
+  else ip=PAT[pair]||null}
+ var s0=ts[0],s1=ts[1];
+ if((norm[s0]||0)>=dev&&(norm[s1]||0)>=dev)sp=SPAT[[s0,s1].sort().join("_")]||null;
+ return {raw:raw,norm:norm,cat:cat,ti:ti,ts:ts,ip:ip,sp:sp}}
+function finalize(){if(S.status!=="in_progress")return;S.scores=computeScores(S);S.status="completed";S.endedAt=Date.now();save();
+ if(!S.sheetSent){S.sheetSent=1;save();
+  var c=DB.children.filter(function(x){return x.id===S.childId})[0];
+  var p=c?DB.users.filter(function(x){return x.id===c.parentId})[0]:null,sc=S.scores;
+  sheetSend("hasil",["Waktu Kirim","Kode Sesi","Nama Anak","Nama Orang Tua","Usia","Kelompok Usia","Tanggal Selesai","Interaksi Selesai","Tantangan Tuntas","Pembangun","Penjelajah","Pencipta","Penolong","Pemimpin","Pengatur","Pola Ketertarikan","Ingin Tahu","Kreatif","Pemecah Masalah","Bekerja Sama","Tekun","Pengambil Keputusan","Pola Kekuatan"],
+  [[new Date().toLocaleString(),S.code,c?c.nick:"",p?p.name:"",c?sheetAge(c):"",c?BANDL(c.band):"",new Date(S.endedAt).toLocaleString(),
+   S.responses.length,S.responses.filter(function(r){return r.tier==="F"}).length,
+   sc.norm.BI||0,sc.norm.EX||0,sc.norm.CR||0,sc.norm.HE||0,sc.norm.LE||0,sc.norm.OR||0,sc.ip?T(sc.ip):"",
+   sc.norm.CU||0,sc.norm.CT||0,sc.norm.PS||0,sc.norm.CO||0,sc.norm.PE||0,sc.norm.DM||0,sc.sp?T(sc.sp):""]]);
+  var rows=S.responses.map(function(r){var g=GAMES[r.g]||{t:"?"};
+   return[new Date().toLocaleString(),S.code,c?c.nick:"",g.t,"Item "+(r.ii+1),
+    (GAMES[r.g]&&GAMES[r.g].items[r.ii])?GAMES[r.g].items[r.ii].t:"",sheetChoiceLabel(r),
+    r.s.map(function(x){return x[0]+"+"+x[1]}).join(", "),
+    r.tier==="F"?"Tuntas":r.tier==="P"?"Sebagian":"",
+    r.ms,r.at,r.help?"Ya":"Tidak",new Date(r.ts).toLocaleString()]});
+  sheetSend("respons",["Waktu Kirim","Kode Sesi","Nama Anak","Game","Item","Tipe","Pilihan Jawaban","Konstruk & Poin","Hasil Tantangan","Waktu (ms)","Percobaan","Pakai Bantuan","Waktu Jawab"],rows)}}
+function cwResult(){RER=cwResult;if(!S.scores)finalize();var sc=S.scores;
+ $("#childroot").innerHTML=chHead("🌟 "+(LANG==="id"?"Hasilmu":"Your Results"),100)+
+ '<div class="w2" style="text-align:center"><div class="prompt">'+(LANG==="id"?"KAMU MENEMUKAN...":"YOU DISCOVERED...")+'</div>'+
+ '<div class="buddyrow">'+sc.ti.slice(0,3).map(function(c){return '<div class="rbadge" style="border-color:'+CI[c][3]+'"><div class="ri">'+CI[c][2]+'</div><b style="font-family:Fredoka;color:'+CI[c][3]+'">'+(LANG==="id"?CI[c][0]:CI[c][1])+'</b></div>'}).join("")+'</div>'+
+ '<div class="prompt" style="margin-top:20px">'+(LANG==="id"?"KEKUATAN MISIMU":"YOUR QUEST STRENGTHS")+'</div><div>'+
+ sc.ts.slice(0,3).map(function(c){return '<span class="pill" style="font-size:15px;margin:4px">⭐ '+(LANG==="id"?CS[c][0]:CS[c][1])+'</span>'}).join("")+'</div>'+
+ '<div class="prompt" style="margin-top:20px">'+(LANG==="id"?"MISI BERIKUTNYA":"YOUR NEXT QUEST")+'</div>'+
+ '<div class="grid3" style="max-width:640px;margin:0 auto">'+
+ [RECS[sc.ti[0]][0],RECS[sc.ti[0]][1],RECS[sc.ti[1]][0]].map(function(r){return '<div class="gm"><div class="gi">'+r[0]+'</div><b>'+esc(T(r[1]))+'</b></div>'}).join("")+'</div>'+
+ '<button class="btn big te" style="margin-top:20px" onclick="parentGate()">🏁 '+(LANG==="id"?"Selesai — kembali ke Orang Tua":"Finish — back to Parent")+'</button></div>'}
+function parentGate(){var a=2+Math.floor(Math.random()*8),b=1+Math.floor(Math.random()*9);
+ modal('<div class="prompt" style="font-size:20px">🚪 '+(LANG==="id"?"Gerbang Orang Tua":"Parent Gate")+'</div>'+
+ '<p class="note">'+(LANG==="id"?"Hanya untuk orang tua:":"For parents only:")+' '+a+' + '+b+' = ?</p>'+
+ '<input id="ga" type="number" style="margin:10px 0"><div class="err" id="ge"></div>'+
+ '<button class="btn" onclick="gateCheck('+(a+b)+')">OK</button> <button class="btn gh" onclick="cmodal()">✕</button>')}
+function gateCheck(v){if(+$("#ga").value!==v){$("#ge").textContent=LANG==="id"?"Belum tepat.":"Not correct.";return}
+ cmodal();adult();vDash()}
+var OB=null;
+function vObserve(sid){RER=function(){vObserve(sid)};adult();topbar();OB={sid:sid,a:{}};
+ $("#app").innerHTML='<div class="w2"><h2>'+(LANG==="id"?"Ceritakan Tentang Anakmu":"Tell Us About Your Child")+'</h2>'+
+ '<p class="note">'+(LANG==="id"?"12 pernyataan · ini <b>bukti pelengkap</b>, TIDAK digabung ke skor anak.":"12 statements · <b>complementary evidence</b>, NOT merged into the child's score.")+'</p><div id="obs">'+
+ OBS.map(function(o,i){return '<div class="obq"><b>'+esc(T(o[0]))+'</b><div class="obopts">'+
+ OBOPT.map(function(op,j){return '<button class="obopt" id="ob'+i+'_'+j+'" onclick="obSel('+i+','+j+')">'+esc(T(op))+'</button>'}).join("")+'</div></div>'}).join("")+
+ '</div><div class="err" id="obe"></div><button class="btn" onclick="saveObs()">'+(LANG==="id"?"Simpan Observasi":"Save Observation")+'</button></div>'}
+function obSel(i,j){OB.a[i]=j;for(var k=0;k<4;k++){var el=$("#ob"+i+"_"+k);if(el)el.classList.toggle("on",k===j)}}
+function saveObs(){if(Object.keys(OB.a).length<12){$("#obe").textContent=LANG==="id"?"Jawab semua 12 pernyataan.":"Answer all 12 statements.";return}
+ var o={id:uid(),sessionId:OB.sid,answers:OB.a,ts:Date.now(),sent:1};DB.obs.push(o);save();
+ var s=DB.sessions.filter(function(x){return x.id===OB.sid})[0];
+ var c=s?DB.children.filter(function(x){return x.id===s.childId})[0]:null;
+ sheetSend("observasi",["Waktu Kirim","Kode Sesi","Nama Anak","Pernyataan","Jawaban"],
+ OBS.map(function(q,i){return[new Date().toLocaleString(),s?s.code:"",c?c.nick:"",T(q[0]),T(OBOPT[o.answers[i]])]}));
+ vReport(OB.sid)}
+function vReport(sid){RER=function(){vReport(sid)};adult();topbar();
+ var ses=DB.sessions.filter(function(x){return x.id===sid})[0],c=DB.children.filter(function(x){return x.id===ses.childId})[0];
+ var sc=computeScores(ses),ob=DB.obs.filter(function(o){return o.sessionId===sid})[0];
+ var bar=function(code){return '<div class="reprow"><div class="lb">'+(LANG==="id"?CI[code][0]:CI[code][1])+'</div><div class="bar"><i style="width:'+(sc.norm[code]||0)+'%;background:'+CI[code][3]+'"></i></div><div class="vl">'+(sc.norm[code]||0)+'</div><div class="pill g" style="font-size:11px">'+sc.cat[code]+'</div></div>'};
+ var sbar=function(code){return '<div class="reprow"><div class="lb">'+(LANG==="id"?CS[code][0]:CS[code][1])+'</div><div class="bar"><i style="width:'+(sc.norm[code]||0)+'%;background:var(--em2)"></i></div><div class="vl">'+(sc.norm[code]||0)+'</div><div class="pill g" style="font-size:11px">'+sc.cat[code]+'</div></div>'};
+ var fullN=ses.responses.filter(function(r){return r.tier==="F"}).length;
+ var retryN=ses.responses.filter(function(r){return r.s.some(function(x){return x[0]==="PE"})}).length;
+ var obHtml;
+ if(ob){var top=Object.keys(ob.answers).filter(function(i){return ob.answers[i]>=2}).sort(function(a,b){return ob.answers[b]-ob.answers[a]}).slice(0,3);
+  obHtml='<p>'+(LANG==="id"?"Menurut pengamatan orang tua, anak":"According to the parent, the child")+' <b>'+(LANG==="id"?"sering":"often")+'</b>: '+
+  top.map(function(i){return esc(T(OBS[i][0]).replace(/^Anak saya /,"").replace(/^My child /,""))}).join("; ")+'.</p>'+
+  '<p class="note">*'+(LANG==="id"?"Perspektif orang tua — bukti pelengkap, tidak digabung ke skor.":"Parent perspective — complementary, not merged into scores.")+'</p>'}
+ else obHtml='<p class="note">'+(LANG==="id"?"Observasi orang tua belum diisi.":"Parent observation not yet filled.")+'</p>';
+ $("#app").innerHTML='<div class="w2"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><h2>Child Development & Interest Profile</h2>'+
+ '<span style="margin-left:auto"></span><button class="btn" onclick="window.print()">🖨️ '+(LANG==="id"?"Cetak / Simpan PDF":"Print / Save PDF")+'</button>'+
+ '<button class="btn gh" onclick="vDash()">← '+(LANG==="id"?"Dasbor":"Dashboard")+'</button></div>'+
+ '<div class="card" id="rep" style="margin-top:12px">'+
+ '<div style="text-align:center;padding:10px 0"><div style="font-size:40px">🧭</div><h2 style="margin:0">TAV FUTURE TALENT QUEST™</h2>'+
+ '<b>Child Development & Interest Profile</b><p>'+esc(c.nick)+' · '+BANDL(c.band)+' · '+new Date(ses.endedAt||Date.now()).toLocaleDateString(LANG==="id"?"id-ID":"en-US")+'<br>'+(LANG==="id"?"Sesi":"Session")+' '+ses.code+'</p></div>'+
+ '<hr style="border:1px solid var(--sd);margin:10px 0">'+
+ '<h4>1. '+(LANG==="id"?"Tentang Asesmen":"About the Assessment")+'</h4>'+
+ '<p class="note">'+(LANG==="id"?"Asesmen eksplorasi berbasis game (5 mini-game, 50 interaksi: pilihan ketertarikan, tantangan kekuatan, pilihan perilaku). Ketertarikan & kekuatan diukur sebagai konstruk terpisah dan tidak digabung.":"Game-based exploration (5 mini-games, 50 interactions: interest choices, strength challenges, behavioral choices). Interest & strength are separate constructs and never merged.")+'</p>'+
+ '<h4 style="margin-top:12px">2. '+(LANG==="id"?"Profil Ketertarikan":"Interest Profile")+' <span class="pill g">MVP normalized — '+(LANG==="id"?"bukan persentil":"not percentiles")+'</span></h4>'+
+ Object.keys(CI).map(bar).join("")+
+ (sc.ip?'<p style="margin-top:8px"><b>'+(LANG==="id"?"Pola":"Pattern")+': '+T(sc.ip)+'</b></p>':"")+
+ '<h4 style="margin-top:12px">3. '+(LANG==="id"?"Indikator Kekuatan":"Strength Indicators")+'</h4>'+
+ Object.keys(CS).map(sbar).join("")+
+ (sc.sp?'<p style="margin-top:8px"><b>'+(LANG==="id"?"Pola kekuatan":"Strength pattern")+': '+T(sc.sp)+'</b></p>':"")+
+ '<h4 style="margin-top:12px">4. '+(LANG==="id"?"Apa yang Kami Amati":"What We Observed")+'</h4>'+
+ '<p class="note">'+(LANG==="id"?"Selama misi, anak menunjukkan keterlibatan relatif lebih kuat pada aktivitas ":"During the quests, the child showed relatively stronger engagement with ")+
+ T(CIDES[sc.ti[0]])+(LANG==="id"?" dan ":" and ")+T(CIDES[sc.ti[1]])+(LANG==="id"?", dengan bukti relatif lebih kuat pada ":" with relatively stronger evidence of ")+T(CSDES[sc.ts[0]])+'.</p>'+
+ '<ul class="note" style="margin:8px 0 0 18px"><li>'+
+ (LANG==="id"?"Menyelesaikan ":"Completed ")+fullN+(LANG==="id"?" dari 20 tantangan pada tingkat penuh":" of 20 challenges at full level")+'</li><li>'+
+ (LANG==="id"?"Mengambil pilihan bertahan/mencoba lagi pada ":"Made persistent/retry choices in ")+retryN+(LANG==="id"?" situasi":" situations")+'</li><li>'+
+ (LANG==="id"?"Waktu respons, jumlah percobaan & bantuan tercatat untuk riset (tidak masuk skor)":"Response time, attempts & help recorded for research (never scored)")+'</li></ul>'+
+ '<h4 style="margin-top:12px">5. '+(LANG==="id"?"Area untuk Dijelajahi":"Areas to Explore")+'</h4>'+
+ '<div class="grid3">'+[sc.ti[0],sc.ti[1]].map(function(d){return '<div><b style="color:'+CI[d][3]+'">'+CI[d][2]+' '+(LANG==="id"?CI[d][0]:CI[d][1])+'</b><ul class="note" style="margin:4px 0 0 18px">'+
+ RECS[d].map(function(r){return '<li>'+r[0]+' '+esc(T(r[1]))+'</li>'}).join("")+'</ul></div>'}).join("")+'</div>'+
+ '<p class="note" style="margin-top:8px"><b>'+(LANG==="id"?"Panduan orang tua":"Parent guidance")+':</b> '+
+ (LANG==="id"?"beri pilihan; biarkan bereksperimen; dorong bertanya; biarkan menyelesaikan proyek mandiri; amati aktivitas yang sukarela diulang.":"give choices; let them experiment; encourage questions; allow independent project completion; watch which activities they voluntarily return to.")+'</p>'+
+ '<h4 style="margin-top:12px">6. '+(LANG==="id"?"Observasi Orang Tua":"Parent Observation")+'</h4>'+obHtml+
+ '<h4 style="margin-top:12px">7. '+(LANG==="id"?"Keterbatasan (wajib)":"Limitations (mandatory)")+'</h4>'+
+ '<div class="disc" style="margin-top:6px">'+(LANG==="id"?"TAV Future Talent Quest™ adalah alat eksplorasi ketertarikan & kekuatan berbasis game. Hasil adalah profil awal dan TIDAK boleh ditafsirkan sebagai diagnosis, skor IQ, identifikasi bakat definitif, atau prediksi keberhasilan karier masa depan.":"TAV Future Talent Quest™ is a game-based interest & strength exploration tool. Results are a preliminary profile and must NOT be interpreted as a diagnosis, IQ score, definitive talent identification, or prediction of future career success.")+'</div>'+
+ '<h4 style="margin-top:12px">8. '+(LANG==="id"?"Informasi Asesmen":"Assessment Information")+'</h4>'+
+ '<table class="tb"><tr><td>'+(LANG==="id"?"Versi":"Version")+'</td><td>'+ses.ver+' (Preliminary/Pilot)</td></tr>'+
+ '<tr><td>'+(LANG==="id"?"Game selesai":"Games completed")+'</td><td>5 / 5</td></tr>'+
+ '<tr><td>'+(LANG==="id"?"Interaksi":"Interactions")+'</td><td>'+ses.responses.length+' / 50</td></tr>'+
+ '<tr><td>'+(LANG==="id"?"Tipe profil":"Profile type")+'</td><td>Preliminary — MVP normalized scores</td></tr></table>'+
+ '</div></div>'}
+function vAdminLogin(){RER=vAdminLogin;adult();topbar();
+ $("#app").innerHTML='<div class="w2"><h2>Admin Login</h2><div class="card"><label class="f">Email</label><input id="a1" value="admin@tav.id">'+
+ '<label class="f">Password</label><input id="a2" type="password"><div class="err" id="ae"></div>'+
+ '<button class="btn" onclick="doAdmin()">Login</button></div></div>'}
+function doAdmin(){if($("#a1").value==="admin@tav.id"&&$("#a2").value==="tavlabs2026"){
+ var u=DB.users.filter(function(x){return x.email==="admin@tav.id"})[0];
+ if(!u){u={id:uid(),name:"TAV Admin",email:"admin@tav.id",pass:"tavlabs2026",adm:true};DB.users.push(u)}
+ DB.set.cur="admin@tav.id";DB.set.admOn=true;save();vAdmin("dash")}
+ else $("#ae").textContent=LANG==="id"?"Kredensial admin salah.":"Wrong admin credentials."}
+function vAdmin(tab){RER=function(){vAdmin(tab)};if(!DB.set.admOn){vAdminLogin();return}
+ adult();topbar();var done=DB.sessions.filter(function(s){return s.status==="completed"}),body="";
+ if(tab==="dash"){var avg={};
+  if(done.length){Object.keys(CI).concat(Object.keys(CS)).forEach(function(c){
+   var t=0;done.forEach(function(s){t+=(computeScores(s).norm[c]||0)});avg[c]=Math.round(t/done.length)})}
+  body='<div class="grid3"><div class="gm"><div class="gi">👨‍👩‍👧</div><b>'+DB.users.filter(function(u){return !u.adm}).length+'</b><div class="note">'+(LANG==="id"?"Orang tua terdaftar":"Parents")+'</div></div>'+
+  '<div class="gm"><div class="gi">🧒</div><b>'+DB.children.length+'</b><div class="note">'+(LANG==="id"?"Profil anak":"Child profiles")+'</div></div>'+
+  '<div class="gm"><div class="gi">📊</div><b>'+done.length+'/'+DB.sessions.length+'</b><div class="note">'+(LANG==="id"?"Sesi selesai/total":"Sessions done/total")+'</div></div></div>'+
+  '<h4 style="margin-top:16px">'+(LANG==="id"?"Rata-rata skor domain (sesi selesai)":"Average domain scores (completed)")+'</h4>'+
+  (done.length?Object.keys(CI).map(function(c){return '<div class="reprow"><div class="lb">'+CI[c][2]+' '+(LANG==="id"?CI[c][0]:CI[c][1])+'</div><div class="bar"><i style="width:'+(avg[c]||0)+'%;background:'+CI[c][3]+'"></i></div><div class="vl">'+(avg[c]||0)+'</div></div>'}).join(""):"<p class='note'>—</p>")}
+ else if(tab==="konten"){body=GAMES.map(function(g){return '<h4 style="margin-top:14px">'+g.icon+' '+g.t+' — '+T(g.badge)+'</h4>'+
+  '<table class="tb"><tr><th>#</th><th>'+(LANG==="id"?"Tipe":"Type")+'</th><th>'+(LANG==="id"?"Pertanyaan":"Prompt")+'</th><th>'+(LANG==="id"?"Konstruk":"Constructs")+'</th></tr>'+
+  g.items.map(function(it,i){var cs={};(it.o||[]).forEach(function(o){pick(o[2]).forEach(function(x){cs[x[0]]=1})});
+  pick(it.wf||"").forEach(function(x){cs[x[0]]=1});
+  return '<tr><td>'+(i+1)+'</td><td>'+it.t+(it.r!=="g"?" · "+it.r:"")+'</td><td>'+esc(T(it.q)).slice(0,70)+'…</td><td>'+Object.keys(cs).join(", ")+'</td></tr>'}).join("")+'</table>'}).join("")}
+ else if(tab==="skor"){body='<div class="card"><b>'+(LANG==="id"?"Ambang batas (dapat diubah)":"Thresholds (editable)")+'</b>'+
+  '<label class="f">'+(LANG==="id"?"Relatif Menonjol ≥":"Relatively Strong ≥")+' <input id="t1" type="number" value="'+DB.set.strong+'" style="width:90px;display:inline-block"></label>'+
+  '<label class="f">'+(LANG==="id"?"Berkembang ≥":"Developing ≥")+' <input id="t2" type="number" value="'+DB.set.dev+'" style="width:90px;display:inline-block"></label>'+
+  '<button class="btn" onclick="saveThr()">'+(LANG==="id"?"Simpan":"Save")+'</button>'+
+  '<p class="note" style="margin-top:8px">'+(LANG==="id"?"Normalisasi MVP = skor mentah / maksimum × 100 (bukan persentil). Pola: 8 pasangan interest + 4 strength; pasangan Builder+Explorer dinamis sesuai domain tertinggi.":"MVP normalization = raw / max × 100 (not percentiles).")+'</p></div>'}
+ else if(tab==="rek"){body=Object.keys(RECS).map(function(c){return '<h4 style="margin-top:14px;color:'+CI[c][3]+'">'+CI[c][2]+' '+(LANG==="id"?CI[c][0]:CI[c][1])+'</h4><p class="note">'+
+  RECS[c].map(function(r){return r[0]+' '+esc(T(r[1]))}).join(" · ")+'</p>'}).join("")}
+ else if(tab==="ekspor"){body='<div class="card"><p class="note">'+(LANG==="id"?"Data riset: seluruh respons + telemetri (waktu, percobaan, bantuan) — tersimpan tapi tidak masuk skor.":"Research data: all responses + telemetry — stored but never scored.")+'</p>'+
+  '<button class="btn" onclick="expJ()">⬇ JSON</button> <button class="btn gh" onclick="expC()">⬇ CSV</button> '+
+  '<button class="btn dk" onclick="if(confirm(\'Reset semua data demo?\')){localStorage.removeItem(\'tftq_v1\');location.reload()}">♻ '+(LANG==="id"?"Reset demo":"Reset demo")+'</button>'+
+  '<hr style="border:1px solid var(--sd);margin:14px 0"><b>Google Spreadsheet</b>'+
+  '<div style="margin-top:8px"><button class="btn te" onclick="sheetTest()">🔌 '+(LANG==="id"?"Tes Kirim ke Sheet":"Test Send")+'</button></div>'+
+  '<p class="note" style="margin-top:8px">'+(LANG==="id"?"Data terkirim otomatis dari semua perangkat saat: pendaftaran · profil anak · persetujuan · asesmen selesai · observasi tersimpan.":"Auto-sent from all devices.")+'</p></div>'}
+ $("#app").innerHTML='<div class="w"><h2>Admin — TAV Future Talent Quest™</h2><div class="tabs">'+
+ [["dash","📊 "+(LANG==="id"?"Dasbor":"Dashboard")],["konten","🎮 "+(LANG==="id"?"Konten":"Content")],["skor","⚙️ "+(LANG==="id"?"Skoring":"Scoring")],["rek","🎯 "+(LANG==="id"?"Rekomendasi":"Recommendations")],["ekspor","📤 "+(LANG==="id"?"Ekspor Riset":"Research Export")]]
+ .map(function(t){return '<button class="tab '+(tab===t[0]?"on":"")+'" onclick="vAdmin(\''+t[0]+'\')">'+t[1]+'</button>'}).join("")+'</div>'+body+'</div>'}
+function saveThr(){DB.set.strong=+$("#t1").value;DB.set.dev=+$("#t2").value;save();vAdmin("skor")}
+function dl(blob,name){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click()}
+function expJ(){dl(new Blob([JSON.stringify({ver:DB.set.ver,sessions:DB.sessions},null,1)],{type:"application/json"}),"tftq_research.json")}
+function expC(){var rows=[["session","interaction","response","tier","time_ms","attempts","help","timestamp"]];
+ DB.sessions.forEach(function(s){s.responses.forEach(function(r){rows.push([s.code,r.g+"_"+r.ii,JSON.stringify(r.r),r.tier||"",r.ms,r.at,r.help?1:0,new Date(r.ts).toISOString()])})});
+ dl(new Blob([rows.map(function(r){return r.join(",")}).join("\n")],{type:"text/csv"}),"tftq_responses.csv")}
+/* ===== SPREADSHEET OTOMATIS ===== */
+var SHEET_URL="https://script.google.com/macros/s/AKfycby5ovmN-bGur5Jx8909dFmZknFmgFhbp4HtlhPYM27H0NKQkxX6djR-gCzOUoiViW6r/exec";
+var SHEET_KEY="TAV2026";
+function sheetSend(type,headers,rows){if(!SHEET_URL)return;
+ try{fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},
+ body:JSON.stringify({key:SHEET_KEY,type:type,headers:headers,rows:rows})})}catch(e){}}
+function sheetAge(c){var n=new Date();return n.getFullYear()-c.by-(n.getMonth()+1<c.bm?1:0)}
+function sheetChoiceLabel(r){var g=GAMES[r.g]||{items:[]},it=g.items[r.ii];
+ if(!it)return"";
+ if(r.r===null||r.r===undefined){return it.pat?"susunan balok":it.steps?"urutan langkah":it.bins?"sortir kartu":""}
+ if(it.o&&typeof r.r==="number"&&it.o[r.r])return T(it.o[r.r][1]);
+ if(it.o&&r.r&&r.r.map)return r.r.map(function(x){return it.o[x]?T(it.o[x][1]):x}).join(" | ");
+ if(it.tiles&&r.r&&r.r.map)return r.r.map(function(x){return it.tiles[x]?T(it.tiles[x][1]):x}).join(" | ");
+ if(it.cats&&r.r&&r.r.map)return r.r.map(function(v,i){return T(it.cats[i])+": "+v}).join(" | ");
+ return(typeof r.r==="object")?JSON.stringify(r.r):r.r}
+function sheetTest(){sheetSend("test",["Waktu Tes","Pesan"],[[new Date().toLocaleString(),"Tes koneksi"]]);
+ alert(LANG==="id"?"Terkirim! Cek tab Test di Spreadsheet Anda (±10 detik).":"Sent! Check the Test tab (~10s).")}
+/* ===== MENU PANDUAN ===== */
+var GSTEP=0;
+function gf(u,inner){return '<div class="gframe"><div class="gbar"><i></i><i></i><i></i><span>'+u+'</span></div><div class="gscr">'+inner+'</div></div>'}
+function GM(n){var d=(LANG==="id"),x;
+ if(n==="landing")return gf("tavfuturetalent.id",
+ '<div style="font-family:Fredoka;font-weight:700;font-size:13px;color:#1F4D3A">🧭 TAV Future Talent Quest™</div>'+
+ '<div style="font-family:Fredoka;color:#C95A34;font-size:10px;font-weight:600">Main. Temukan. Jelajahi.</div>'+
+ '<div style="height:44px;border-radius:8px;background:linear-gradient(180deg,#BFE3F2,#A8D283);margin:6px 0"></div>'+
+ '<span class="mbtn te">🚀 '+(d?"Mulai Petualangan":"Start")+'</span> <span class="mbtn o">'+(d?"Untuk Orang Tua":"For Parents")+'</span>'+
+ '<div style="text-align:right;margin-top:6px"><span class="mtag">⬆ ID | EN</span></div>');
+ if(n==="reg")return gf(d?"Daftar Orang Tua":"Register",
+ '<div class="minp">👤 '+(d?"Nama lengkap":"Full name")+'</div><div class="minp">✉️ Email</div><div class="minp">🔑 '+(d?"Kata sandi (min. 6)":"Password (min. 6)")+'</div>'+
+ '<div style="margin-top:6px"><span class="mbtn">'+(d?"Daftar & Masuk":"Register & Login")+'</span></div>');
+ if(n==="dash")return gf(d?"Dasbor Orang Tua":"Dashboard",
+ '<div class="mnode"><span style="font-size:18px">👦</span><b>Fathian</b> <span class="mtag" style="background:#D9F2E4;color:#1F4D3A">9–11</span><span class="mbtn te" style="margin-left:auto;font-size:9px">▶ '+(d?"Lanjutkan":"Resume")+'</span></div>'+
+ '<div style="margin-top:6px"><span class="mbtn">＋ '+(d?"Tambah Anak":"Add Child")+'</span></div>'+
+ '<p class="mtag" style="display:block;margin-top:6px">👆 '+(d?"Tombol 1–4 memandu tiap langkah":"Buttons 1–4 guide you")+'</p>');
+ if(n==="child")return gf(d?"Profil Anak":"Child Profile",
+ '<div class="minp">🧒 '+(d?"Nama panggilan anak":"Nickname")+'</div><div class="minp">📅 '+(d?"Tahun & bulan lahir":"Birth year & month")+'</div>'+
+ '<p style="font-size:10px;color:#6f6759;margin:4px 0">'+(d?"Kelompok usia otomatis: 6–8 · 9–11 · 12–14":"Age band automatic")+'</p><span class="mbtn">'+(d?"Simpan":"Save")+'</span>');
+ if(n==="consent")return gf(d?"Persetujuan Orang Tua":"Consent",
+ '<div class="mcard" style="font-size:10px;color:#6f6759">'+(d?"BUKAN diagnosis / tes IQ / prediksi karier; data hanya dilihat saya & TAV.":"NOT a diagnosis / IQ test / career prediction.")+'</div>'+
+ '<label style="font-size:10.5px;font-weight:800;display:block;margin:6px 0">☑ '+(d?"Saya telah membaca dan memahami":"I have read and understood")+'</label><span class="mbtn">'+(d?"Setuju & Lanjutkan":"Agree")+'</span>');
+ if(n==="buddy")return gf(d?"MODE ANAK — Sambutan":"CHILD MODE",
+ '<div style="font-family:Fredoka;font-size:11px;color:#1F4D3A;text-align:center">'+(d?"Pilih sahabat petualangmu!":"Pick your buddy!")+'</div>'+
+ '<div style="display:flex;gap:8px;margin-top:6px">'+
+ '<div class="mcard" style="flex:1;text-align:center"><div style="font-size:20px">👦</div><b style="font-family:Fredoka;font-size:10.5px">MALIK</b><div style="font-size:9px;color:#6f6759">🗺️ '+(d?"Si Penunjuk Arah":"Guide")+'</div></div>'+
+ '<div class="mcard" style="flex:1;text-align:center"><div style="font-size:20px">👧</div><b style="font-family:Fredoka;font-size:10.5px">MINTANG</b><div style="font-size:9px;color:#6f6759">📓 '+(d?"Si Pencatat":"Note-Taker")+'</div></div></div>');
+ if(n==="map")return gf(d?"Peta Misi":"Quest Map",
+ '<div class="mnode" style="border-color:#F7C948"><span>🔧</span><b>1. Build It</b><span style="margin-left:auto">▶</span></div>'+
+ '<div class="mnode" style="opacity:.55"><span>🔎</span><b>2. Mystery Lab</b><span style="margin-left:auto">🔒</span></div>'+
+ '<div class="mnode" style="opacity:.55"><span>🎨</span><b>3. Design Studio</b><span style="margin-left:auto">🔒</span></div>'+
+ '<div style="text-align:center;margin-top:5px"><span class="mtag">★ 12 / 50</span></div>');
+ if(n==="game")return gf(d?"Misi — Build It 3/10":"Quest — 3/10",
+ '<div style="display:flex;gap:6px;align-items:center;font-size:9px;font-weight:800"><span>🔧 Build It</span><span style="color:#a07d00">★2</span><div class="mbar"><i style="width:5%;height:100%;display:block;background:#17A06C"></i></div><span>🚪</span></div>'+
+ '<div style="font-family:Fredoka;font-size:11px;color:#1F4D3A;text-align:center;margin:8px 0">'+(d?"Proyek apa yang ingin kamu bangun dulu?":"Which project first?")+'</div>'+
+ '<div style="display:flex;gap:6px">'+["🌉|"+(d?"Jembatan":"Bridge"),"🛝|"+(d?"Menara":"Tower")+" 👆","🛠️|"+(d?"Bengkel":"Workshop")].map(function(s,i){var p=s.split("|");return '<div class="mcard" style="flex:1;text-align:center;font-size:8.5px;font-weight:800'+(i===1?';border-color:#0E7C56;background:#D9F2E4':'')+'"><div style="font-size:14px">'+p[0]+'</div>'+p[1]+'</div>'}).join("")+'</div>');
+ if(n==="mech")return gf(d?"Mekanik Game":"Mechanics",
+ '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">'+
+ '<div class="mcard"><b style="font-size:9px">🧩 '+(d?"Susun pola":"Pattern")+'</b><div style="font-size:12px;letter-spacing:2px;margin-top:2px">🟫🟫🟥🟫</div></div>'+
+ '<div class="mcard"><b style="font-size:9px">🔢 '+(d?"Urutkan":"Sequence")+'</b><div style="font-size:9px;margin-top:3px">👀→📝→🧪→✅</div></div>'+
+ '<div class="mcard"><b style="font-size:9px">🔎 '+(d?"Cari petunjuk":"Clues")+'</b><div style="font-size:12px;margin-top:2px">🌱💧🌷</div></div>'+
+ '<div class="mcard"><b style="font-size:9px">💰 '+(d?"Bagi 100 token":"Tokens")+'</b><div style="font-size:9px;margin-top:3px">− 50 ＋ · − 25 ＋</div></div></div>'+
+ '<p class="mtag" style="display:block;margin-top:6px">'+(d?"Token = permainan, bukan uang":"Play tokens only")+'</p>');
+ if(n==="reward")return gf(d?"Hadiah & Istirahat":"Rewards",
+ '<div class="mcard" style="text-align:center"><div style="font-size:16px">🎉</div><b style="font-family:Fredoka;font-size:11px;color:#1F4D3A">'+(d?"Hebat, kamu berhasil!":"Awesome!")+'</b></div>'+
+ '<div style="display:flex;gap:4px;justify-content:center;margin:8px0">'+
+ ["🔧","🔎","🎨","🤝","🚀"].map(function(e,i){return '<div style="width:22px;height:22px;border-radius:6px;border:2px solid '+(i<2?"#F7C948":"#F1E7CF")+';background:'+(i<2?"#FBE9C8":"#fff")+';display:grid;place-items:center;font-size:11px">'+e+'</div>'}).join("")+'</div>'+
+ '<p style="font-size:9.5px;color:#6f6759;text-align:center">'+(d?"Hadiah dari penyelesaian misi — bukan skor":"Rewards for completion, never scores")+'</p>');
+ if(n==="result")return gf(d?"Hasil Anak":"Child Result",
+ '<div style="font-family:Fredoka;font-size:10.5px;color:#1F4D3A;text-align:center">'+(d?"KAMU MENEMUKAN...":"YOU DISCOVERED...")+'</div>'+
+ '<div style="display:flex;gap:6px;justify-content:center;margin:6px 0">'+
+ [["🔎",d?"Penjelajah":"Explorer","#4EA5DC"],["🎨",d?"Pencipta":"Creator","#8E6FC1"],["🔧",d?"Pembangun":"Builder","#E8734A"]].map(function(x){return '<div class="mcard" style="text-align:center;border-color:'+x[2]+'"><div style="font-size:13px">'+x[0]+'</div><b style="font-size:9px;color:'+x[2]+'">'+x[1]+'</b></div>'}).join("")+'</div>'+
+ '<p class="mtag" style="display:block;text-align:center">'+(d?"⭐ tanpa angka untuk anak":"no numbers for the child")+'</p>');
+ if(n==="gate")return gf(d?"Gerbang Orang Tua":"Parent Gate",
+ '<div class="mcard" style="text-align:center"><div style="font-size:14px">🚪</div><b style="font-family:Fredoka;font-size:10.5px;color:#1F4D3A">'+(d?"Gerbang Orang Tua":"Parent Gate")+'</b>'+
+ '<div style="font-size:12px;font-weight:800;margin:5px 0">7 + 5 = ?</div><div class="minp" style="width:70px;margin:0 auto;text-align:center">…</div><div style="margin-top:6px"><span class="mbtn">OK</span></div></div>');
+ if(n==="obs")return gf(d?"Observasi Orang Tua":"Observation",
+ '<div class="mcard"><div style="font-size:10px;font-weight:800">'+(d?"Anak saya sering bertanya bagaimana sesuatu bekerja.":"My child often asks how things work.")+'</div>'+
+ '<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">'+
+ [d?"Tidak Pernah":"Never",d?"Kadang-kadang":"Sometimes",d?"Sering":"Often",d?"Sangat Sering":"Very Often"].map(function(o,i){return '<span class="mtag" style="'+(i===2?"background:#0E7C56;color:#fff":"")+'">'+o+'</span>'}).join("")+'</div></div>');
+ if(n==="report")return gf(d?"Laporan & PDF":"Report & PDF",
+ [["Pembangun","Builder",60,"#E8734A"],["Penjelajah","Explorer",85,"#4EA5DC"],["Pencipta","Creator",78,"#8E6FC1"],["Penolong","Helper",42,"#E96A7C"]].map(function(x){return '<div style="display:flex;align-items:center;gap:6px;margin:3px 0"><span style="width:58px;font-size:9px;font-weight:800">'+(d?x[0]:x[1])+'</span><div class="mbar"><i style="width:'+x[2]+'%;height:100%;display:block;background:'+x[3]+'"></i></div><b style="font-size:9px">'+x[2]+'</b></div>'}).join("")+
+ '<div style="margin-top:8px"><span class="mbtn">🖨️ '+(d?"Cetak / Simpan PDF":"Print / PDF")+'</span></div>');
+ if(n==="admin")return gf("ADMIN",
+ '<div style="display:flex;gap:4px;flex-wrap:wrap">'+
+ ["📊 "+(d?"Dasbor":"Dash"),"🎮 "+(d?"Konten":"Content"),"⚙️ "+(d?"Skoring":"Scoring"),"🎯 "+(d?"Rekomendasi":"Recs"),"📤 "+(d?"Ekspor":"Export")].map(function(t,i){return '<span class="mtag" style="'+(i===0?"background:#1F4D3A;color:#fff":"background:#fff;border:1px solid #F1E7CF")+'">'+t+'</span>'}).join("")+'</div>'+
+ '<div style="display:flex;gap:6px;margin-top:8px">'+
+ [["👨‍👩‍👧","12",d?"Orang tua":"Parents"],["🧒","15",d?"Anak":"Children"],["📊","8/10",d?"Sesi":"Sessions"]].map(function(x){return '<div class="mcard" style="flex:1;text-align:center"><div style="font-size:12px">'+x[0]+'</div><b style="font-family:Fredoka;font-size:11px;color:#1F4D3A">'+x[1]+'</b><div style="font-size:8px;color:#6f6759">'+x[2]+'</div></div>'}).join("")+'</div>');
+ return""}
+var GUIDE=[
+{m:"landing",t:"1. Beranda & Bahasa|1. Home & Language",d:"Buka situs Anda. Ganti bahasa kapan saja lewat ID / EN di kanan atas. Klik tombol oranye untuk mulai.|Open your site. Switch language with ID / EN top right. Click the orange button to begin.",al:"🚀 Buka Halaman Daftar|🚀 Open Registration",act:"vReg()"},
+{m:"reg",t:"2. Daftar Orang Tua|2. Registration",d:"Isi nama, email, kata sandi (min. 6), lalu Daftar & Masuk. Nama & email otomatis masuk tab Pendaftaran di Spreadsheet.|Fill name, email, password. Auto-sent to the Pendaftaran tab.",al:"🚀 Buka Halaman Daftar|🚀 Open Registration",act:"vReg()"},
+{m:"dash",t:"3. Dasbor Orang Tua|3. Dashboard",d:"Pusat kendali Anda. Tombol bernomor 1–4 memandu: persetujuan → mode anak → observasi → laporan. Satu akun bisa banyak anak; tiap pengulangan asesmen = sesi baru.|Your control center. One account, many children; every retake is a new session."},
+{m:"child",t:"4. Profil Anak|4. Child Profile",d:"Isi nama panggilan + tahun & bulan lahir. Kelompok usia otomatis (6–8 / 9–11 / 12–14). Otomatis masuk tab Anak.|Nickname + birth year & month. Age band automatic. Auto to the Anak tab."},
+{m:"consent",t:"5. Persetujuan Orang Tua|5. Consent",d:"Baca, centang, Setuju. Anak tidak bisa bermain tanpa ini. Tercatat di tab Persetujuan.|Read, tick, Agree. Recorded in the Persetujuan tab."},
+{m:"buddy",t:"6. Pilih Sahabat|6. Pick a Buddy",d:"Serahkan perangkat ke anak. Anak memilih Malik (🗺️) atau Mintang (📓), lalu tutorial singkat.|Hand the device to your child. They pick Malik or Mintang."},
+{m:"map",t:"7. Peta Misi|7. Quest Map",d:"5 lokasi terbuka berurutan: ▶ main, 🔒 kunci, 🏅 selesai. Progres tersimpan otomatis — bisa dilanjutkan lain hari.|5 locations unlock in order. Progress saves automatically."},
+{m:"game",t:"8. Menjawab Interaksi|8. Answering",d:"Tiap misi = 10 interaksi. Untuk pilihan ketertarikan, cukup ketuk satu kartu — tidak ada jawaban salah, umpan balik selalu positif.|Each quest = 10 interactions. Tap one card — no wrong answers."},
+{m:"mech",t:"9. Mekanik Game|9. Mechanics",d:"Susun pola balok, urutkan langkah, cari 4 petunjuk, pilah kartu, bagi 100 token toko.|Pattern, sequence, clues, sorting, and 100 shop tokens."},
+{m:"reward",t:"10. Hadiah & Istirahat|10. Rewards",d:"Bintang = interaksi selesai; lencana = misi tuntas. Hadiah dari partisipasi, bukan skor. Kartu istirahat muncul setelah misi ke-2.|Rewards for participation, never scores. Break card after quest 2."},
+{m:"result",t:"11. Hasil Anak|11. Child Result",d:"Setelah 5 misi, anak melihat penemuan & kekuatannya — tanpa angka. Angka hanya di laporan orang tua & Spreadsheet.|No numbers for the child. Numbers only in the report & Sheet."},
+{m:"gate",t:"12. Gerbang Orang Tua|12. Parent Gate",d:"Keluar mode anak: tombol 🚪 Ortu kanan atas → jawab soal penjumlahan.|Exit child mode: 🚪 button → answer an addition."},
+{m:"obs",t:"13. Observasi Orang Tua|13. Observation",d:"12 pernyataan, 4 pilihan. Bukti pelengkap yang TIDAK digabung ke skor — otomatis masuk tab Observasi.|12 statements. Complementary, never merged. Auto to the Observasi tab."},
+{m:"report",t:"14. Laporan & PDF|14. Report & PDF",d:"8 bagian termasuk keterbatasan wajib. Tombol 🖨️ mencetak / menyimpan PDF (pilih tujuan Save as PDF).|8 sections incl. mandatory limitations. 🖨️ prints / saves PDF."},
+{m:"admin",t:"15. Admin & Spreadsheet|15. Admin & Sheet",d:"Login admin@tav.id / tavlabs2026. Tab 📤 Ekspor berisi tombol 🔌 Tes Kirim. Data semua perangkat masuk otomatis ke Spreadsheet Anda.|Login as admin. 🔌 Test Send in the Export tab. Data flows into your Sheet.",al:"🔑 Buka Login Admin|🔑 Admin Login",act:"vAdminLogin()"}];
+function vGuide(){RER=vGuide;adult();topbar();var s=GUIDE[GSTEP];
+ $("#app").innerHTML='<div class="w2" id="gd">'+
+ '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><h2>📖 '+(LANG==="id"?"Panduan Penggunaan":"User Guide")+'</h2>'+
+ '<button class="btn gh" style="margin-left:auto;padding:8px 16px" onclick="vLanding()">← '+(LANG==="id"?"Beranda":"Home")+'</button></div>'+
+ '<p class="note">'+(LANG==="id"?"15 langkah — dari daftar sampai data masuk Spreadsheet.":"15 steps — from registration to data in your Sheet.")+'</p>'+
+ '<div class="gdots">'+GUIDE.map(function(g,i){return '<button class="gdot '+(i===GSTEP?"on":"")+'" onclick="gGo('+i+')" title="'+esc(T(g.t))+'">'+(i+1)+'</button>'}).join("")+'</div>'+
+ GM(s.m)+
+ '<div class="card" style="margin-top:14px"><h3>'+T(s.t)+'</h3><p style="font-size:15px;margin-top:6px">'+T(s.d)+'</p>'+
+ '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">'+
+ (GSTEP>0?'<button class="btn gh" onclick="gGo('+(GSTEP-1)+')">← '+(LANG==="id"?"Sebelumnya":"Back")+'</button>':"")+
+ (s.act?'<button class="btn te" onclick="'+s.act+'">'+T(s.al)+'</button>':"")+
+ (GSTEP<GUIDE.length-1?'<button class="btn" onclick="gGo('+(GSTEP+1)+')">'+(LANG==="id"?"Berikutnya":"Next")+' →</button>':'<button class="btn" onclick="vLanding()">🏁 '+(LANG==="id"?"Selesai":"Done")+'</button>')+
+ '</div></div></div>'}
+function gGo(i){GSTEP=Math.max(0,Math.min(GUIDE.length-1,i));vGuide()}
+/* ===== BOOT ===== */
+load();
+(function(){var u=DB.set.cur?DB.users.filter(function(x){return x.email===DB.set.cur})[0]:null;
+ if(!u){vLanding();return}
+ var kids=myKids().map(function(c){return c.id});
+ var ip=DB.sessions.filter(function(s){return s.status==="in_progress"&&kids.indexOf(s.childId)>=0});
+ if(ip.length){S=ip[ip.length-1];document.body.classList.add("cm");S.buddy?cwMap():cwWelcome();return}
+ if(u.adm&&DB.set.admOn){vAdmin("dash");return}
+ vDash()})();
+</script>
+</body>
+</html>
